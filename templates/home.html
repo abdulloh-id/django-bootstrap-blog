@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}Bosh sahifa{% endblock title %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-      Salom, {{ user.first_name }}!
-      <form method="post" action="{% url 'logout' %}">{% csrf_token %}
-          <button type="submit" class="btn btn-primary">Chiqib ketish</button>
-      </form>
-    {% else %}
-      <p>Saytga kirmagansiz</p>
-      <a href="{% url 'login' %}"><button type="button" class="btn btn-success">Kirish</button></a> |
-      <a href="{% url 'signup' %}"><button type="button" class="btn btn-primary">Ro'yxatdan o'tish</button></a>
-    {% endif %}
+    <br/>
+    <div class="jumbotron">
+        <h1 class="display-4">Assalom alaykum!</h1>
+        <p class="lead">Namunaviy shaxsiy blogga xush kelibsiz.</p>
+        <hr class="my-4">
+        <p>Bu yerda siz turli sohalarga oid so'nggi yangiliklardan xabardor bo'lib turasiz.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Postlarni ko'rish</a>
+        </p>
+    </div>
 {% endblock content %}
