@@ -7,6 +7,7 @@ from django.views.generic import (
 	)
 from django.urls import reverse_lazy
 from .models import Article
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Define a view to display a list of all articles
 class ArticleListView(ListView):
@@ -19,22 +20,37 @@ class ArticleDetailView(DetailView):
     template_name = 'article_detail.html'
 
 # Define a view to update an existing article
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
     fields = ('title', 'summary', 'body', 'photo',)
     template_name = 'article_edit.html'
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
 # Define a view to delete an article
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
     template_name = 'article_delete.html'
     success_url = reverse_lazy('article_list')
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
 # Define a view to create a new article
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Article
     template_name = 'article_new.html'
-    fields = ('title', 'summary', 'body', 'photo', 'author')
+    fields = ('title', 'summary', 'body', 'photo')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 

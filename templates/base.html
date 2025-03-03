@@ -32,10 +32,21 @@
 	          </a>
 	          <ul class="dropdown-menu">
 	            <li><a class="dropdown-item" href="{% url 'password_change'%}">Parolni almashtirish</a></li>
-	            <li><a class="dropdown-item" href="#">Another action</a></li>
+				<li>
+				    <form action="{% url 'logout' %}" method="post">
+				        {% csrf_token %}
+				        <button class="dropdown-item" type="submit">Chiqish</button>
+				    </form>
+				</li>
 	            <li><a class="dropdown-item" href="#">Something else here</a></li>
 	          </ul>
 	        </li>
+	        {% else %}
+	        <div class="flex justify-content-end">
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'login' %}">Kirish</a>
+	        </li>
+	    	</div>
 	        {% endif %}
 	      </ul>
 	    </div>
