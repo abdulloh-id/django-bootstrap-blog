@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a423da06f4fc52a84e46fa2a133d2a4b6f487255b0b7f9fb65a6b86c0626d805"
+            "sha256": "86d73bc0a6364a9d433a8d763b311fecccd8bf25963b7162621b827b2cecdc63"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -35,12 +35,21 @@
         },
         "django": {
             "hashes": [
-                "sha256:236e023f021f5ce7dee5779de7b286565fdea5f4ab86bae5338e3f7b69896cf0",
-                "sha256:de450c09e91879fa5a307f696e57c851955c910a438a35e6b4c895e86bedc82a"
+                "sha256:1e39eafdd1b185e761d9fab7a9f0b9fa00af1b37b25ad980a8aa0dac13535690",
+                "sha256:8d203400bc2952fbfb287c2bbda630297d654920c72a73cc82a9ad7926feaad5"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==5.1.4"
+            "version": "==5.1.6"
+        },
+        "django-ckeditor": {
+            "hashes": [
+                "sha256:2b3f147ce21eba861db481683e9a4639c11f0ad1f0d37c179003ef07f9eb65a4",
+                "sha256:a66be4f0ca13924d756e4930260144b31df4164eae8b942ca610f4313df00d5f"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==6.7.2"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -59,6 +68,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==0.11.2"
+        },
+        "django-js-asset": {
+            "hashes": [
+                "sha256:8119c03d4d066f32ddedffcf2f4a63cce47e5bcbb6f7fb07d0557755bd23e677",
+                "sha256:8c79e674b6f08beef7d86dab7ee1ae6780a9eac5840005b8c6707f5a0d5933c0"
+            ],
+            "markers": "python_version >= '3.10'",
+            "version": "==3.1.1"
         },
         "pillow": {
             "hashes": [
@@ -148,11 +165,11 @@
         },
         "tzdata": {
             "hashes": [
-                "sha256:7d85cc416e9382e69095b7bdf4afd9e3880418a2413feec7069d533d6b4e31cc",
-                "sha256:a48093786cdcde33cad18c2555e8532f34422074448fbc874186f0abd79565cd"
+                "sha256:24894909e88cdb28bd1636c6887801df64cb485bd593f2fd83ef29075a81d694",
+                "sha256:7e127113816800496f027041c570f50bcd464a020098a3b6b199517772303639"
             ],
             "markers": "python_version >= '2'",
-            "version": "==2024.2"
+            "version": "==2025.1"
         }
     },
     "develop": {}
