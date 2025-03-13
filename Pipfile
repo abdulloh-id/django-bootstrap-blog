@@ -8,8 +8,8 @@ django = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 pillow = "*"
-django-ckeditor = "*"
 django-environ = "*"
+django-contrib-comments = "*"
 
 [dev-packages]
 

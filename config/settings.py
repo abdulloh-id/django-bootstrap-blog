@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     # external apps
     'crispy_forms',
     'crispy_bootstrap5',
-    'ckeditor',
-    'ckeditor_uploader',
+    'tinymce',
+    'django.contrib.sites',
+    'django_comments',
     # my apps
     'accounts',
     'pages',
@@ -138,6 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+COMMENTS_APP = 'django_comments'
+
 # Showing email on the console
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -156,17 +159,21 @@ EMAIL_USE_TLS = True
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+SITE_ID = 1
+
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Full',
-    },
+TINYMCE_DEFAULT_CONFIG = {
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': 'lists, quote, hr',  # Added 'quote' and 'hr'
+    'toolbar1': 'bold italic bullist blockquote hr',  # Added 'blockquote' and 'hr'
+    'menubar': False,
+    'statusbar': False,
 }
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_RESTRICT_BY_USER = True

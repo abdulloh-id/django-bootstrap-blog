@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "86d73bc0a6364a9d433a8d763b311fecccd8bf25963b7162621b827b2cecdc63"
+            "sha256": "7997934c601cf95fdc8436875377ff8f7950cc7986ac8cbaf8cd9193279ff817"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -35,21 +35,20 @@
         },
         "django": {
             "hashes": [
-                "sha256:1e39eafdd1b185e761d9fab7a9f0b9fa00af1b37b25ad980a8aa0dac13535690",
-                "sha256:8d203400bc2952fbfb287c2bbda630297d654920c72a73cc82a9ad7926feaad5"
+                "sha256:1323617cb624add820cb9611cdcc788312d250824f92ca6048fda8625514af2b",
+                "sha256:30de4ee43a98e5d3da36a9002f287ff400b43ca51791920bfb35f6917bfe041c"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==5.1.6"
+            "version": "==5.1.7"
         },
-        "django-ckeditor": {
+        "django-contrib-comments": {
             "hashes": [
-                "sha256:2b3f147ce21eba861db481683e9a4639c11f0ad1f0d37c179003ef07f9eb65a4",
-                "sha256:a66be4f0ca13924d756e4930260144b31df4164eae8b942ca610f4313df00d5f"
+                "sha256:2ca79060bbc8fc5b636981ef6e50f35ab83649af75fc1be47bf770636be3271c",
+                "sha256:48de00f15677e016a216aeff205d6e00e4391c9a5702136c64119c472b7356da"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==6.7.2"
+            "version": "==2.2.0"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -68,14 +67,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.9' and python_version < '4'",
             "version": "==0.12.0"
-        },
-        "django-js-asset": {
-            "hashes": [
-                "sha256:8119c03d4d066f32ddedffcf2f4a63cce47e5bcbb6f7fb07d0557755bd23e677",
-                "sha256:8c79e674b6f08beef7d86dab7ee1ae6780a9eac5840005b8c6707f5a0d5933c0"
-            ],
-            "markers": "python_version >= '3.10'",
-            "version": "==3.1.1"
         },
         "pillow": {
             "hashes": [

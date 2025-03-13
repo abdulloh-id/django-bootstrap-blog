@@ -20,11 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('articles/', include('articles.urls')),
+    path('comments/', include('django_comments.urls')), # Added comments urls
     path('', include('pages.urls')),
 ]
 
