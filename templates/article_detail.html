@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load comments %}
+{% load comments crispy_forms_tags %}
 
 {% block content %}
     <div class="container-fluid">
@@ -20,16 +20,27 @@
         </div>
         <div class="card mt-3">
             <div class="card-header">Izohlar</div>
-            {% for comment in object.comments.all %}
+            {% get_comment_list for object as comment_list %}
+            {% for comment in comment_list %}
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>{{ comment.content }}</p>
-                        <footer class="blockquote-footer">{{ comment.author }} | {{ comment.created_at }}</footer>
+                        <p>{{ comment.comment }}</p>
+                        <footer class="blockquote-footer">{{ comment.user_name }} | {{ comment.submit_date }}</footer>
                     </blockquote>
+                </div>
+            {% empty %}
+                <div class="card-body">
+                    <p>Hali izohlar yo'q</p>
                 </div>
             {% endfor %}
             <div class="card-footer">
-                {% render_comment_form object %}
+                <form method="post" action="{% url 'comments-post-comment' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ article.get_absolute_url }}">  <!-- Redirect to article -->
+                    {% get_comment_form for object as form %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
             </div>
         </div>
     </div>

@@ -9,6 +9,9 @@ from django.urls import reverse_lazy
 from .models import Article
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ArticleForm
+from .forms import CrispyCommentForm  # Import your custom comment form
+
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Define a view to display a list of all articles
 class ArticleListView(ListView):
@@ -16,6 +19,8 @@ class ArticleListView(ListView):
     template_name = 'article_list.html'
 
 # Define a view to display the details of a single article
+from django.views import View
+
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'

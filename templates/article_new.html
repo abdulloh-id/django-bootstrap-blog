@@ -3,10 +3,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<section>
     <h1>Yangi post</h1>
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form.media }}
+        {{ form.errors }}
         {{ form|crispy }}
     <button class="btn btn-success ml-2" type="submit">Saqlash</button>
     </form>
+</section>
 {% endblock content %}

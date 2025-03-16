@@ -139,7 +139,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-COMMENTS_APP = 'django_comments'
+# Crispy Forms configuration
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# Django Comments configuration
+COMMENTS_APP = "django_comments"
+COMMENTS_FORM = "articles.forms.CrispyCommentForm"
+COMMENTS_XTD_MAX_THREAD_LEVEL = 3
+
 
 # Showing email on the console
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -161,8 +170,6 @@ LOGOUT_REDIRECT_URL = 'home'
 
 SITE_ID = 1
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
 # Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
@@ -171,9 +178,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',
-    'theme': 'modern',
-    'plugins': 'lists, quote, hr',  # Added 'quote' and 'hr'
-    'toolbar1': 'bold italic bullist blockquote hr',  # Added 'blockquote' and 'hr'
+    'theme': 'silver',
+    'plugins': 'lists, emoticons, link',  # Added 'quote' and 'hr'
+    'toolbar1': 'bold italic bullist blockquote hr link',  # Added 'blockquote' and 'hr'
     'menubar': False,
     'statusbar': False,
 }
