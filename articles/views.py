@@ -11,29 +11,27 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ArticleForm
 from .forms import CrispyCommentForm  # Import your custom comment form
 
-from django.shortcuts import render, get_object_or_404, redirect
-
-# Define a view to display a list of all articles
+# View to display a list of all articles
 class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
 
-# Define a view to display the details of a single article
-from django.views import View
-
+# View to display the details of a single article
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
 
+# View to update an existing article
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
-    form_class = ArticleForm  # Use the form class
+    form_class = ArticleForm
     template_name = 'article_edit.html'
 
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
 
+# View to delete an article
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
     template_name = 'article_delete.html'
@@ -43,9 +41,10 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         obj = self.get_object()
         return obj.author == self.request.user
 
+# View to create a new article
 class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Article
-    form_class = ArticleForm  # Use the form class
+    form_class = ArticleForm
     template_name = 'article_new.html'
 
     def form_valid(self, form):

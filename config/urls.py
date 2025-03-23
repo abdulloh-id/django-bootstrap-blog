@@ -19,12 +19,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+def comment_redirect(request):
+    """ Redirect users back to the article instead of showing 'Thank You' """
+    return redirect(request.GET.get('next', '/'))
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('articles/', include('articles.urls')),
-    path('comments/', include('django_comments.urls')), # Added comments urls
+    path('comments/', include('django_comments.urls')),  # Comments
+    path('comments/posted/', comment_redirect, name='comments-comment-done'),  # Comments redirect
     path('', include('pages.urls')),
 ]
 
