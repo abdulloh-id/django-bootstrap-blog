@@ -1,28 +1,33 @@
 {% extends 'base.html' %}
-
-{% block title %}Postlar{% endblock title %}
+{% load static %}
 
 {% block content %}
-    <div class="row justify-content-center">
-        {% for article in object_list %}
-            <div class="col-md-8 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="font-weight-bold">
-                            <a href="{% url 'article_detail' article.pk %}"><h2>{{ article.title }}</h2></a>
-                        </span>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5 mb-lg-0">
+                {% for article in object_list %}  
+                <article class="row mb-5">
+                    <div class="col-12">
+                        {% if article.photo %}
+                        <div class="post-slider">
+                            <img loading="lazy" src="{{ article.photo.url }}" class="img-fluid" alt="{{ article.title }}">
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if article.photo %}
-                        <img class="card-img-top" src="{{ article.photo.url }}" alt="{{ article.title }}">
-                    {% endif %}
-                    <div class="card-body">
-                        {{ article.summary|truncatewords:20 }}...<a href="{% url 'article_detail' article.pk %}">batafsil</a>
+                    <div class="col-lg-10 mx-auto">
+                        <h3><a class="post-title" href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h3>
+                        <ul class="list-inline post-meta mb-4">
+                            <li class="list-inline-item"><i class="ti-user mr-2"></i><a href="#">{{ article.author|title }}</a></li>
+                            <li class="list-inline-item">Date : {{ article.date|date:"F j, Y" }}</li>
+                        </ul>
+                        <p>{{ article.summary|truncatewords:20 }}... <a href="{% url 'article_detail' article.pk %}">batafsil</a></p>
+                        <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">Continue Reading</a>
                     </div>
-                    <div class="card-footer text-left text-muted">
-                        <span class="text-muted">Muallif: {{ article.author|title }} &middot; {{ article.date|date:"F j, Y" }}</span>
-                    </div>
-                </div>
+                </article>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
+</section>
 {% endblock content %}

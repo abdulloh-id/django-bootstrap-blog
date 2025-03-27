@@ -2,46 +2,72 @@
 {% load comments crispy_forms_tags %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                {% if object.photo %}
-                    <img class="card-img-top" src="{{ object.photo.url }}" alt="{{ object.title }}">
-                {% endif %}
-                <h1 class="card-title">{{ object.title }}</h1>
-                <h6 class="card-subtitle mb-2 text-muted">Muallif: {{ object.author }} | {{ object.date }}</h6>
-                <p class="card-text">{{ object.body|safe }}</p>
-                {% if user == object.author or user.is_superuser %}
-                    <a href="{% url 'article_edit' object.pk %}">Tahrirlash</a> |
-                    <a href="{% url 'article_delete' object.pk %}">O'chirish</a> |
-                {% endif %}
-                <a href="{% url 'article_list' %}">Barcha postlar</a>
+<section class="section">
+    <div class="container">
+        <article class="row mb-4">
+            <div class="col-lg-10 mx-auto mb-4">
+                <h1 class="h2 mb-3">{{ object.title }}</h1>
+                <ul class="list-inline post-meta mb-3">
+                    <li class="list-inline-item">
+                        <i class="ti-user mr-2"></i>
+                        <a href="#">{{ object.author }}</a>
+                    </li>
+                    <li class="list-inline-item">{{ object.date|date:"F j, Y" }}</li>
+                </ul>
             </div>
-        </div>
-        <div class="card mt-3">
-            <div class="card-header">Izohlar</div>
+
+            {% if object.photo %}
+            <div class="col-12 mb-3">
+                <div class="post-slider">
+                    <img src="{{ object.photo.url }}" class="img-fluid" alt="{{ object.title }}">
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="col-lg-10 mx-auto">
+                <div class="content">
+                    {{ object.body|safe }}
+                </div>
+
+                <div class="mt-4">
+                    {% if user == object.author or user.is_superuser %}
+                        <a href="{% url 'article_edit' object.pk %}" class="btn btn-outline-primary mr-2">Tahrirlash</a>
+                        <a href="{% url 'article_delete' object.pk %}" class="btn btn-outline-danger mr-2">O'chirish</a>
+                    {% endif %}
+                    <a href="{% url 'article_list' %}" class="btn btn-outline-secondary">Barcha postlar</a>
+                </div>
+            </div>
+        </article>
+
+        <div class="col-lg-10 mx-auto mt-5">
+            <h4 class="mb-4">Izohlar</h4>
             {% get_comment_list for object as comment_list %}
             {% for comment in comment_list %}
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>{{ comment.comment }}</p>
-                        <footer class="blockquote-footer">{{ comment.user_name }} | {{ comment.submit_date }}</footer>
-                    </blockquote>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.comment }}</p>
+                        <footer class="blockquote-footer">
+                            {{ comment.user_name }} | {{ comment.submit_date }}
+                        </footer>
+                    </div>
                 </div>
             {% empty %}
-                <div class="card-body">
-                    <p>Hali izohlar yo'q</p>
-                </div>
+                <p>Hali izohlar yo'q</p>
             {% endfor %}
-            <div class="card-footer">
-                <form method="post" action="{% url 'comments-post-comment' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ article.get_absolute_url }}">  <!-- Redirect to article -->
-                    {% get_comment_form for object as form %}
-                    {{ form | crispy }}
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                </form>
+
+            <div class="card mt-4">
+                <div class="card-header">Izoh qoldirish</div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'comments-post-comment' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ object.get_absolute_url }}">
+                        {% get_comment_form for object as form %}
+                        {{ form | crispy }}
+                        <button type="submit" class="btn btn-primary mt-2">Yuborish</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</section>
 {% endblock content %}

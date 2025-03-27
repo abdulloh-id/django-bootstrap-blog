@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="section"> 
+    <div class="container"> 
+        <div class="row justify-content-center"> 
+            <div class="col-md-12"> 
     <h1>Postni o'chirish</h1>
     <form action="" method="post">{% csrf_token %}
         <p>"{{ object.title }}" nomli postni o'chirishni istaysizmi?</p>
         <button class="btn btn-danger ml-2" type="submit">Ha</button>
     </form>
+                </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}

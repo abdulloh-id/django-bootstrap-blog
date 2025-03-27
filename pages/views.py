@@ -1,12 +1,5 @@
 from django.shortcuts import render
 
-# View for the homepage
-# def home_page(request):
-#     return render(request, 'home.html')
-
-def index_page(request):
-	return render(request, 'index-full.html')
-
 # View for post details 1
 def post_details_1_page(request):
     return render(request, 'post-details-1.html')
