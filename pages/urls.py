@@ -17,5 +17,6 @@ urlpatterns += [
     path('privacy-policy/', views.privacy_policy_page, name='privacy-policy'),  # Privacy policy
     path('terms-conditions/', views.terms_conditions_page, name='terms-conditions'),  # Terms and conditions
     path('post-elements/', views.post_elements_page, name='post-elements'),  # Development reference
+    path('logout/', views.logout_view, name='logout'),
     # Add other views here
 ]

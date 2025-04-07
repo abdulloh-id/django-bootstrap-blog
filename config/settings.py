@@ -165,8 +165,8 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Use an app-specific password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index-full'
+LOGOUT_REDIRECT_URL = 'index-full'
 
 SITE_ID = 1
 
