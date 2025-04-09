@@ -21,7 +21,7 @@
                             <li class="list-inline-item"><i class="ti-user mr-2"></i><a href="#">{{ article.author|title }}</a></li>
                             <li class="list-inline-item">Date : {{ article.date|date:"F j, Y" }}</li>
                         </ul>
-                        <p>{{ article.summary|truncatewords:20 }}... <a href="{% url 'article_detail' article.pk %}">batafsil</a></p>
+                        <p>{{ article.summary }}</p>
                         <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">Continue Reading</a>
                     </div>
                 </article>

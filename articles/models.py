@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Article(models.Model):
     title = models.CharField(max_length=150)
-    summary = models.CharField(max_length=200, blank=True)
+    summary = models.CharField(max_length=250, blank=True)
     body = models.TextField()  # Replaced RichTextField with TextField
     photo = models.ImageField(upload_to='images/', blank=True)
     date = models.DateTimeField(auto_now_add=True)
