@@ -2,32 +2,44 @@
 {% load static %}
 
 {% block content %}
-<section class="section">
+<main class="section py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-12 mb-5 mb-lg-0">
-                {% for article in object_list %}  
-                <article class="row mb-5">
-                    <div class="col-12">
-                        {% if article.photo %}
-                        <div class="post-slider">
-                            <img loading="lazy" src="{{ article.photo.url }}" class="img-fluid" alt="{{ article.title }}">
-                        </div>
-                        {% endif %}
+        {% for article in object_list %}
+        <article class="col-12 mx-auto mb-3 mt-3">
+            <div class="mb-3">
+                {% if article.photo %}
+                <div class="post-slider mb-3">
+                    <img 
+                        loading="lazy" 
+                        src="{{ article.photo.url }}" 
+                        class="img-fluid rounded" 
+                        alt="{{ article.title }}">
+                </div>
+                {% endif %}
+                <h3>
+                    <a class="post-title text-decoration-none" href="{% url 'article_detail' article.pk %}">
+                        {{ article.title }}
+                    </a>
+                </h3>
+                <div class="d-flex align-items-center post-meta mb-3">
+                    <div class="author-info me-4">
+                        <i class="ti-user me-2 text-primary"></i>
+                        <a href="#" class="text-decoration-none">{{ article.author|title }}</a>
                     </div>
-                    <div class="col-lg-10 mx-auto">
-                        <h3><a class="post-title" href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h3>
-                        <ul class="list-inline post-meta mb-4">
-                            <li class="list-inline-item"><i class="ti-user mr-2"></i><a href="#">{{ article.author|title }}</a></li>
-                            <li class="list-inline-item">Date : {{ article.date|date:"F j, Y" }}</li>
-                        </ul>
-                        <p>{{ article.summary }}</p>
-                        <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">Continue Reading</a>
+                    <div class="date-info ml-2">
+                        <i class="ti-calendar me-2 text-primary"></i>
+                        <span class="text-muted">{{ article.date|date:"F j, Y" }}</span>
                     </div>
-                </article>
-                {% endfor %}
+                </div>
+                <p>{{ article.summary }}</p>
+                <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">
+                    Continue Reading
+                </a>
             </div>
-        </div>
+        </article>
+        {% empty %}
+        <p class="text-center">No articles found.</p>
+        {% endfor %}
     </div>
-</section>
-{% endblock content %}
+</main>
+{% endblock %}

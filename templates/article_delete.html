@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="section"> 
+<main class="section py-5"> 
     <div class="container"> 
         <div class="row justify-content-center"> 
-            <div class="col-md-12"> 
-    <h1>Postni o'chirish</h1>
-    <form action="" method="post">{% csrf_token %}
-        <p>"{{ object.title }}" nomli postni o'chirishni istaysizmi?</p>
-        <button class="btn btn-danger ml-2" type="submit">Ha</button>
-    </form>
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h2 class="card-title mb-0 text-primary">Postni o'chirish</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="" method="post">{% csrf_token %}
+                            <p>"{{ object.title }}" nomli postni o'chirishni istaysizmi?</p>
+                            <div class="mt-4 text-end">
+                                <button class="btn btn-light me-2" type="button" onclick="history.back()">Bekor qilish</button>
+                                <button class="btn btn-danger ml-2" type="submit">Ha</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
-</section>
+</main>
 {% endblock content %}

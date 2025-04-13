@@ -1,21 +1,40 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
+{% load crispy_forms_tags %}
 {% block content %}
-<section class="section"> 
+<main class="section py-5"> 
     <div class="container"> 
         <div class="row justify-content-center"> 
-            <div class="col-md-12"> 
-                <h1>Yangi post</h1>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.media }}
-                    {{ form.errors }}
-                    {{ form|crispy }}
-                    <button class="btn btn-success ml-2" type="submit">Saqlash</button>
-                </form>
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h2 class="card-title mb-0 text-primary">Yangi post</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Iltimos, quyidagi xatolarni to'g'rilang:</strong>
+                                {{ form.errors }}
+                            </div>
+                            {% endif %}
+                            
+                            {{ form|crispy }}
+                            
+                            <div class="mt-4 text-end">
+                                <button class="btn btn-light me-2" type="button" onclick="history.back()">Bekor qilish</button>
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fas fa-save me-1"></i>Saqlash
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</main>
 {% endblock content %}
