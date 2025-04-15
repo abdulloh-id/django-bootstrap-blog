@@ -1,20 +1,53 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block title %}Kirish{% endblock title %}
-
 {% block content %}
-<div class="container mt-5 mb-5">
+<main class="section py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6"> <!-- Adjust the width using Bootstrap columns -->
-            <h2 class="text-center">Saytga kirish</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-primary mt-3">Kirish</button>
-                <a class="btn btn-outline-danger mt-3" href="{% url 'password_reset' %}" role="button">Parolni tiklash</a>
-            </form>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-light text-center py-3">
+                    <!-- Optional: Add logo here -->
+                    <h2 class="text-primary">Saytga kirish</h2>
+                    <p class="text-muted">Hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Meni eslab qolish
+                            </label>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Kirish</button>
+                        </div>
+                        
+                        <div class="mt-3 text-center">
+                            <a href="{% url 'password_reset' %}" class="text-decoration-none">Parolni tiklash</a>
+                            <span class="mx-2">|</span>
+                            <a href="{% url 'signup' %}" class="text-decoration-none">Ro'yxatdan o'tish</a>
+                        </div>
+                    </form>
+                    
+                    <!-- Optional: Add social login buttons here -->
+                    <!-- <div class="mt-4">
+                        <p class="text-center text-muted">Yoki ijtimoiy tarmoqlar orqali kiring</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button class="btn btn-outline-secondary"><i class="bi bi-google"></i> Google</button>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-facebook"></i> Facebook</button>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="card-footer text-center py-3">
+                    <small class="text-muted">Muammo yuzaga keldimi? <a href="{% url 'contact' %}">Biz bilan bog'laning</a></small>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</main>
 {% endblock content %}
