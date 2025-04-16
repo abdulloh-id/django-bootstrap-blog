@@ -4,7 +4,7 @@ from articles.views import HomepageView  # Import HomepageView from articles app
 
 # Class-based views
 urlpatterns = [
-	 path('', HomepageView.as_view(), name='index-full'),  # Use HomepageView for homepage
+	 path('', HomepageView.as_view(), name='home'),  # Use HomepageView for homepage
 ]
 
 # Function-based views

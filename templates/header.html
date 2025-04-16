@@ -3,7 +3,7 @@
 <header class="sticky-top bg-white border-bottom border-default">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-white">
-            <a class="navbar-brand" href="{% url 'index-full' %}">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <img class="img-fluid" width="150px" src="{% static 'images/logo.png' %}" alt="LogBook">
             </a>
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse text-center" id="navigation">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index-full' %}">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -48,7 +48,7 @@
                             <i class="ti-user"></i> {{ user.username }} <i class="ti-angle-down ml-1"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{% url 'index-full' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'home' %}">Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         </div>
