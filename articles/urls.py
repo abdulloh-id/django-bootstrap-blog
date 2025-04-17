@@ -5,7 +5,9 @@ from .views import (
     ArticleUpdateView,
     ArticleDeleteView,
     ArticleCreateView,
+    CommentDeleteView,
     HomepageView,
+
 )
 
 # Class-based views
@@ -15,4 +17,5 @@ urlpatterns = [
     path('<int:pk>/', ArticleDetailView.as_view(), name='article_detail'),  # View details of an article
     path('<int:pk>/delete/', ArticleDeleteView.as_view(), name='article_delete'),  # Delete an article
     path('new/', ArticleCreateView.as_view(), name='article_new'),  # Create a new article
+    path('comments/<int:comment_id>/delete/', CommentDeleteView.as_view(), name='delete_comment'),
 ]

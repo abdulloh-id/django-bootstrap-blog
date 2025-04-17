@@ -1,16 +1,25 @@
-from django.views.generic import (
-    ListView,
-    DetailView,
-    UpdateView,
-    DeleteView,
-    CreateView,
-    TemplateView,  # Add this import
-)
-from django.urls import reverse_lazy
-from .models import Article
+# Django imports
+from django_comments import get_form
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import ArticleForm
-from .forms import CrispyCommentForm
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
+
+# Third-party imports
+from django_comments.models import Comment
+
+# Local imports
+from .forms import ArticleForm, CrispyCommentForm
+from .models import Article
+
 
 # New Paginated Homepage View
 class HomepageView(ListView):
@@ -29,6 +38,12 @@ class ArticleListView(ListView):
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Explicitly provide CrispyCommentForm
+        context['form'] = CrispyCommentForm(target_object=self.object)
+        return context
 
 # View to update an existing article
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -62,3 +77,25 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def test_func(self):
         return self.request.user.is_staff
+
+# View to delete comments by staff members
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    pk_url_kwarg = 'comment_id'
+    
+    def test_func(self):
+        return self.request.user.is_staff
+    
+    def get_success_url(self):
+        article = self.object.content_object
+        return article.get_absolute_url()
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        messages.success(request, "Izoh muvaffaqiyatli o'chirildi.")
+        return redirect(success_url)
+    
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)

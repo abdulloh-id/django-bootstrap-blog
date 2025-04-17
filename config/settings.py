@@ -147,7 +147,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Django Comments configuration
 COMMENTS_APP = "django_comments"
 COMMENTS_FORM = "articles.forms.CrispyCommentForm"
-COMMENTS_XTD_MAX_THREAD_LEVEL = 3
 
 
 # Showing email on the console
@@ -165,8 +164,8 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Use an app-specific password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-LOGIN_REDIRECT_URL = 'index-full'
-LOGOUT_REDIRECT_URL = 'index-full'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 SITE_ID = 1
 
