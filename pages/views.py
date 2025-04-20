@@ -1,9 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-
-def logout_view(request):
-    logout(request)
-    return redirect('home')  # Change 'home' to your desired URL
 
 # View for post details 1
 def post_details_1_page(request):

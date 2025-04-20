@@ -1,10 +1,12 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 from . import views
 from articles.views import HomepageView  # Import HomepageView from articles app
 
 # Class-based views
 urlpatterns = [
 	 path('', HomepageView.as_view(), name='home'),  # Use HomepageView for homepage
+     path('accounts/logout/', LogoutView.as_view(next_page='home'), name='logout'),
 ]
 
 # Function-based views
@@ -17,6 +19,5 @@ urlpatterns += [
     path('privacy-policy/', views.privacy_policy_page, name='privacy-policy'),  # Privacy policy
     path('terms-conditions/', views.terms_conditions_page, name='terms-conditions'),  # Terms and conditions
     path('post-elements/', views.post_elements_page, name='post-elements'),  # Development reference
-    path('logout/', views.logout_view, name='logout'),
     # Add other views here
 ]
