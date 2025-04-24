@@ -150,7 +150,7 @@ COMMENTS_FORM = "articles.forms.CrispyCommentForm"
 
 
 # Showing email on the console
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 env = environ.Env()
 environ.Env.read_env()
