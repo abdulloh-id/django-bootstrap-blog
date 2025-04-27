@@ -1,7 +1,11 @@
-# from django.urls import path
-# from .views import SignUpView
+# accounts/urls.py
+from django.urls import path
+from . import views
 
-# Commented out signup feature, because a blog doesn't need it
-# urlpatterns = [
-# 	path('signup/', SignUpView.as_view(), name='signup'),
-# ]
+app_name = 'accounts'
+
+urlpatterns = [
+    path('profile/', views.edit_profile_view, name='edit_profile'),
+    path('profile/change-password/', views.change_password, name='change_password'),
+    # You might already have other account-related URLs here
+]

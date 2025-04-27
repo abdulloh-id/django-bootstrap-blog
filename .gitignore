@@ -11,3 +11,4 @@ env/
 *.swp
 *.pyc
 *.log
+*.exe

@@ -37,7 +37,7 @@ class ArticleListView(ListView):
 # View to display the details of a single article
 class ArticleDetailView(DetailView):
     model = Article
-    template_name = 'article_detail.html'
+    template_name = 'articles/article_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class ArticleDetailView(DetailView):
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
     form_class = ArticleForm
-    template_name = 'article_edit.html'
+    template_name = 'articles/article_edit.html'
 
     def test_func(self):
         obj = self.get_object()
@@ -58,7 +58,7 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 # View to delete an article
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
-    template_name = 'article_delete.html'
+    template_name = 'articles/article_delete.html'
     success_url = reverse_lazy('home')
 
     def test_func(self):
@@ -69,7 +69,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Article
     form_class = ArticleForm
-    template_name = 'article_new.html'
+    template_name = 'articles/article_new.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user

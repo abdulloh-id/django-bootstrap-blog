@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 def comment_redirect(request):
     """ Redirect users back to the article instead of showing 'Thank You' """
@@ -25,7 +26,7 @@ def comment_redirect(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('accounts/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('articles/', include('articles.urls')),
     path('comments/', include('django_comments.urls')),  # Comments

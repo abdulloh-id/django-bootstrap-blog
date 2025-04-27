@@ -1,0 +1,97 @@
+<!-- accounts/templates/accounts/edit_profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Current Avatar Preview -->
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    <h5>{{ user.get_full_name }}</h5>
+                    <p class="text-muted">{{ user.email }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Personal Information Form -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h5 class="text-primary text-capitalize">Shaxsiy ma'lumotlar</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="first_name">Ism</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Familiya</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate">Tug'ilgan sana</label>
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{ user.birthdate|date:'Y-m-d' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="avatar">Avatar</label>
+                            <input type="file" class="form-control-file" id="avatar" name="avatar">
+                            <small class="form-text text-muted">Tavsiya qilingan o'lcham: 300x300 piksel</small>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="url" class="form-control" id="facebook" name="facebook" value="{{ user.profile.facebook }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter">Twitter</label>
+                            <input type="url" class="form-control" id="twitter" name="twitter" value="{{ user.profile.twitter }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="url" class="form-control" id="linkedin" name="linkedin" value="{{ user.profile.linkedin }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="url" class="form-control" id="instagram" name="instagram" value="{{ user.profile.instagram }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">O'zgarishlarni saqlash</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Change Password Form -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="text-primary text-capitalize">Parolni o'zgartirish</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'accounts:change_password' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="current_password">Hozirgi parol</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password1">Yangi parol</label>
+                            <input type="password" class="form-control" id="new_password1" name="new_password1">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password2">Yangi parolni tasdiqlang</label>
+                            <input type="password" class="form-control" id="new_password2" name="new_password2">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Parolni o'zgartirish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
