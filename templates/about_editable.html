@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags static %}
+
+{% block content %}
+<main class="section py-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mx-auto">
+				<div class="title-bordered mb-5 d-flex align-items-center">
+					<h1 class="h4">Hi, I Am John Doe</h1>
+					<ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block">
+						<li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a>
+						</li>
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a>
+						</li>
+						<li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a>
+						</li>
+						<li class="list-inline-item"><a href="#"><i class="ti-github"></i></a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- View Mode -->
+				<div id="view-mode">
+					{% if about.photo %}
+						<img src="{{ about.photo.url }}" class="img-fluid w-100 mb-4 rounded-lg" alt="author">
+					{% else %}
+						<img src="{% static 'images/author-full.jpg' %}" class="img-fluid w-100 mb-4 rounded-lg" alt="author">
+					{% endif %}
+					
+					<div class="content">
+						{{ about.body|safe }}
+					</div>
+					{% if user.is_staff or user.is_superuser %}
+					<div>
+						<button id="edit-toggle" class="btn btn-outline-primary">
+							<i class="ti-pencil me-1"></i> Sahifani tahrirlash
+						</button>
+					</div>
+					{% endif %}
+				</div>
+
+				<!-- Edit Mode -->
+				{% if user.is_staff or user.is_superuser %}
+				<div id="edit-mode" style="display: none;">
+					<div class="card shadow-sm">
+						<div class="card-header bg-light">
+							<h3 class="card-title mb-0 text-primary text-center">Sahifa ma'lumotlarini tahrirlash</h3>
+						</div>
+						<div class="card-body p-4">
+							<form method="post" enctype="multipart/form-data" id="about-form">
+								{% csrf_token %}
+								{{ form.media }}
+								
+								{% if form.errors %}
+								<div class="alert alert-danger">
+									<strong>Please correct the following errors:</strong>
+									{{ form.errors }}
+								</div>
+								{% endif %}
+								
+								<div class="mb-3">
+									<label for="{{ form.photo.id_for_label }}">Profile Photo</label>
+									<div class="mb-2">
+										{% if about.photo %}
+											<img src="{{ about.photo.url }}" class="img-fluid" style="max-height: 200px;" alt="Current photo">
+											<p class="small text-muted">Current photo</p>
+										{% endif %}
+									</div>
+									{{ form.photo|as_crispy_field }}
+								</div>
+								
+								<div class="mb-3">
+									<label for="{{ form.body.id_for_label }}">About Content</label>
+									{{ form.body|as_crispy_field }}
+								</div>
+								
+								<div class="mt-4 text-end">
+									<button class="btn btn-light me-2" type="button" id="cancel-edit">Bekor qilish</button>
+									<button class="btn btn-primary" type="submit">
+										<i class="ti-save me-1"></i> Saqlash
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</main>
+
+{% if user.is_staff or user.is_superuser %}
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const editToggle = document.getElementById('edit-toggle');
+		const viewMode = document.getElementById('view-mode');
+		const editMode = document.getElementById('edit-mode');
+		const cancelEdit = document.getElementById('cancel-edit');
+		
+		editToggle.addEventListener('click', function() {
+			// Hide view mode and show edit mode
+			viewMode.style.display = 'none';
+			editMode.style.display = 'block';
+			editToggle.style.display = 'none';
+			
+			// Scroll to the top of the page
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+		
+		cancelEdit.addEventListener('click', function() {
+			// Show view mode and hide edit mode
+			viewMode.style.display = 'block';
+			editMode.style.display = 'none';
+			editToggle.style.display = 'inline-block';
+			
+			// Optional: scroll back to where the edit button is
+			const editTogglePosition = editToggle.getBoundingClientRect().top + window.pageYOffset;
+			window.scrollTo({
+				top: editTogglePosition - 100, // Offset to make it more visible
+				behavior: 'smooth'
+			});
+		});
+	});
+</script>
+{% endif %}
+{% endblock content %}
