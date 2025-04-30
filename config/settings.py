@@ -30,7 +30,6 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,6 +63,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+SOCIAL_LINKS = {
+    'facebook': 'https://facebook.com/',
+    'twitter': 'https://twitter.com/',
+    'linkedin': 'https://linkedin.com/in/',
+    'instagram': 'https://instagram.com/',
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -75,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.social_links',
             ],
         },
     },

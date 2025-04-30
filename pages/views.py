@@ -5,18 +5,6 @@ from django.contrib import messages
 from .models import AboutPage
 from .forms import AboutPageForm
 
-# View for post details 1
-def post_details_1_page(request):
-    return render(request, 'post-details-1.html')
-
-# View for post details 2
-def post_details_2_page(request):
-    return render(request, 'post-details-2.html')
-
-# View for the post elements page
-def post_elements_page(request):
-    return render(request, 'post-elements.html')
-
 # View for the contact page
 def contact_page(request):
     return render(request, 'contact.html')
