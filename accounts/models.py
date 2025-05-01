@@ -1,4 +1,4 @@
-# In your accounts/models.py
+# accounts/models.py
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
@@ -10,12 +10,6 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(upload_to='images/avatars', default='avatars/default.png')
-    
-    # Social media links
-    facebook = models.URLField(blank=True)
-    twitter = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
-    instagram = models.URLField(blank=True)
     
     def __str__(self):
         return f"{self.user.username}'s profile"

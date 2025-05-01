@@ -28,12 +28,6 @@ def edit_profile_view(request):
         if 'avatar' in request.FILES:
             profile.avatar = request.FILES['avatar']
         
-        # Update social media links
-        profile.facebook = request.POST.get('facebook')
-        profile.twitter = request.POST.get('twitter')
-        profile.linkedin = request.POST.get('linkedin')
-        profile.instagram = request.POST.get('instagram')
-        
         # Save changes
         user.save()
         profile.save()
