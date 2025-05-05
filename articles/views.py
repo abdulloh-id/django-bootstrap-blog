@@ -2,7 +2,7 @@
 from django_comments import get_form
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -18,7 +18,7 @@ from django_comments.models import Comment
 
 # Local imports
 from .forms import ArticleForm, CrispyCommentForm
-from .models import Article
+from .models import Article, Category, Tag
 
 
 # New Paginated Homepage View
@@ -29,10 +29,52 @@ class HomepageView(ListView):
     paginate_by = 5  # Number of articles per page
     ordering = ['-date']  # Order by most recent first
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 # View to display a list of all articles
 class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+# View for articles by category
+class CategoryArticleListView(ListView):
+    model = Article
+    template_name = 'article_list.html'
+    context_object_name = 'articles'
+    
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
+        return Article.objects.filter(category=self.category).order_by('-date')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['current_category'] = self.category
+        return context
+
+# View for articles by tag
+class TagArticleListView(ListView):
+    model = Article
+    template_name = 'article_list.html'
+    context_object_name = 'articles'
+    
+    def get_queryset(self):
+        self.tag = get_object_or_404(Tag, slug=self.kwargs['slug'])
+        return Article.objects.filter(tags=self.tag).order_by('-date')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['current_tag'] = self.tag
+        return context
 
 # View to display the details of a single article
 class ArticleDetailView(DetailView):
@@ -43,6 +85,7 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         # Explicitly provide CrispyCommentForm
         context['form'] = CrispyCommentForm(target_object=self.object)
+        context['categories'] = Category.objects.all()
         return context
 
 # View to update an existing article
@@ -54,6 +97,11 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 # View to delete an article
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -77,6 +125,11 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def test_func(self):
         return self.request.user.is_staff
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 # View to delete comments by staff members
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

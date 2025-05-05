@@ -40,6 +40,22 @@
                 {% endif %}
                 <a href="{% url 'article_list' %}" class="btn btn-outline-secondary mb-1"><i class="ti-menu"></i> Barcha postlar</a>
             </div>
+            <div class="article-metadata">
+  {% if article.category %}
+  <span class="category">
+    Category: <a href="{% url 'category_articles' article.category.slug %}">{{ article.category.name }}</a>
+  </span>
+  {% endif %}
+  
+  {% if article.tags.all %}
+  <span class="tags">
+    Tags: 
+    {% for tag in article.tags.all %}
+      <a href="{% url 'tag_articles' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </span>
+  {% endif %}
+</div>
         </article>
 
         <!-- Comments Section -->
