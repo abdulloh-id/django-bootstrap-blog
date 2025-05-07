@@ -4,18 +4,22 @@
 {% block content %}
 <main class="section py-5">
     <div class="container">
-        <article class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+        <article class="col-md-10 mx-auto">
             <div class="mb-3">
                 <div class="d-flex align-items-center post-meta mb-3">
-                    <div class="author-info me-4">
-                        <i class="ti-user me-2 text-primary"></i>
-                        <a href="#" class="text-decoration-none">{{ object.author|title }}</a>
+                    <div class="author-info mr-3">
+                        <i class="ti-user text-primary"></i>&nbsp;<a href="#">{{ object.author|title }}</a>
                     </div>
-                    <div class="date-info ml-2">
-                        <i class="ti-calendar me-2 text-primary"></i>
-                        <span class="text-muted">{{ object.date|date:"F j, Y" }}</span>
+                    <div class="date-info mr-3">
+                        <i class="ti-calendar text-primary"></i>&nbsp;<span class="text-muted">{{ object.date|date:"F j, Y" }}</span>
+                    </div>
+                    <div class="category-info">
+                        {% if article.category %}
+                        <span><i class="ti-bookmark text-primary"></i>&nbsp;<a href="{% url 'category_articles' article.category.slug %}">{{ article.category.name }}</a></span>
+                        {% endif %}
                     </div>
                 </div>
+
                 <h1 class="h2 mb-3">{{ object.title }}</h1>
                 <div class="content mb-3">
                     {{ object.summary|safe }}
@@ -28,9 +32,28 @@
                 </div>
             {% endif %}
 
-            <div class="content">
+            <div class="content text-justify">
                 {{ object.body|safe }}
             </div>
+
+            <div class="article-metadata">
+
+            {% if article.tags.all %}
+            <div class=" d-flex">
+                  <h5 class="text-muted mt-1 mr-1"><span>Teglar:&nbsp;</span></h5>
+                  <ul class="list-inline widget-list-inline">
+                    {% for tag in article.tags.all %}
+                     <li class="list-inline-item"><a href="{% url 'tag_articles' tag.slug %}">{{ tag.name }}</a>
+                     </li>
+                     {% if not forloop.last %}
+                     {% endif %}
+                {% endfor %}
+                  </ul>
+               </div>
+              {% endif %}
+
+            </div>
+
 
             <div class="mb-3">
                 {% if user == object.author or user.is_superuser %}
@@ -40,27 +63,15 @@
                 {% endif %}
                 <a href="{% url 'article_list' %}" class="btn btn-outline-secondary mb-1"><i class="ti-menu"></i> Barcha postlar</a>
             </div>
-            <div class="article-metadata">
-  {% if article.category %}
-  <span class="category">
-    Category: <a href="{% url 'category_articles' article.category.slug %}">{{ article.category.name }}</a>
-  </span>
-  {% endif %}
-  
-  {% if article.tags.all %}
-  <span class="tags">
-    Tags: 
-    {% for tag in article.tags.all %}
-      <a href="{% url 'tag_articles' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </span>
-  {% endif %}
-</div>
+
+
         </article>
 
+        <hr class="mt-5 mb-5">
+
         <!-- Comments Section -->
-        <section class="col-lg-8 col-md-10 col-sm-12 mx-auto mt-5">
-            <h3 class="mb-3"><i class="ti-comments"></i> Izohlar <span class="badge bg-primary rounded-pill">{% get_comment_count for object as comment_count %}{{ comment_count }}</span></h3>
+        <section class="col-md-10 mx-auto">
+            <h3 class="mb-3 text-center"><i class="ti-comments"></i> Izohlar <span class="badge bg-primary rounded-pill">{% get_comment_count for object as comment_count %}{{ comment_count }}</span></h3>
                         
             <!-- Comment List -->
             <div class="comments">
