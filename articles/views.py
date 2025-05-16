@@ -1,4 +1,5 @@
 # Django imports
+import random
 from django_comments import get_form
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -38,10 +39,22 @@ class HomepageView(ListView):
 class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
+        
+        categories_with_count = []
+        for category in Category.objects.all():
+            count = category.articles.count()
+            categories_with_count.append({'category': category, 'count': count})
+        context['categories_with_count'] = categories_with_count
+
+        all_tags = Tag.objects.all()
+        context['random_tags'] = random.sample(list(all_tags), min(10, len(all_tags)))
+
+        latest_articles = Article.objects.order_by('-date')[:5]
+        context['latest_articles'] = latest_articles
+
         return context
 
 # View for articles by category

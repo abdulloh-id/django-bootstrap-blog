@@ -3,56 +3,103 @@
 
 {% block content %}
 <main class="section py-5">
-    <div class="sidebar">
-  <h3>Categories</h3>
-  <ul>
-    <li><a href="{% url 'article_list' %}">All Categories</a></li>
-    {% for category in categories %}
-      <li>
-        <a href="{% url 'category_articles' category.slug %}">
-          {{ category.name }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
     <div class="container">
-        {% for article in object_list %}
-        <article class="col-lg-8 col-md-10 col-sm-12 mx-auto mb-3 mt-3">
-            <div class="mb-3">
-                {% if article.photo %}
-                <div class="post-slider mb-3">
-                    <img 
-                        loading="lazy" 
-                        src="{{ article.photo.url }}" 
-                        class="img-fluid rounded" 
-                        alt="{{ article.title }}">
-                </div>
-                {% endif %}
-                <h3>
-                    <a class="post-title text-decoration-none" href="{% url 'article_detail' article.pk %}">
-                        {{ article.title }}
-                    </a>
-                </h3>
-                <div class="d-flex align-items-center post-meta mb-3">
-                    <div class="author-info me-4">
-                        <i class="ti-user me-2 text-primary"></i>
-                        <a href="#" class="text-decoration-none">{{ article.author|title }}</a>
+        <div class="row">
+            <section class="col-md-8">
+                {% for article in object_list %}
+                <article class="row mb-5">
+                    <div class="col-12 mx-auto">
+                        {% if article.photo %}
+                        <div class="post-slider mb-3">
+                            <img
+                                loading="lazy"
+                                src="{{ article.photo.url }}"
+                                class="img-fluid rounded"
+                                alt="{{ article.title }}">
+                        </div>
+                        {% endif %}
+                        <h3>
+                            <a class="post-title text-decoration-none" href="{% url 'article_detail' article.pk %}">
+                            {{ article.title }}
+                            </a>
+                        </h3>
+                        <ul class="list-inline post-meta mb-4">
+                            <li class="list-inline-item"><i class="ti-user mr-2"></i><a href="#">{{ article.author|title }}</a>
+                            </li>
+                            <li class="list-inline-item">Sana: {{ article.date|date:"F j, Y" }}</li>
+                            {% if article.category %}
+                            <li class="list-inline-item">Kategoriya: <a href="{% url 'category_articles' article.category.slug %}" class="ml-1">{{ article.category.name }}</a>
+                            </li>
+                            {% endif %}
+                            {% if article.tags.all %}
+                            <li class="list-inline-item">Teglar:
+                                {% for tag in article.tags.all %}
+                                <a href="{% url 'tag_articles' tag.slug %}" class="ml-1">{{ tag.name|title }}</a>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <p>{{ article.summary }}</p>
+                        <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">
+                        Davomini o'qish
+                        </a>
                     </div>
-                    <div class="date-info ml-2">
-                        <i class="ti-calendar me-2 text-primary"></i>
-                        <span class="text-muted">{{ article.date|date:"F j, Y" }}</span>
-                    </div>
+                </article>
+                {% empty %}
+                <p class="text-center">No articles found.</p>
+                {% endfor %}
+            </section>
+            <aside class="col-md-4">
+                <div class="widget">
+                    <h5 class="widget-title"><span>Search</span></h5>
+                    <form action="/logbook-hugo/search" class="widget-search">
+                        <input id="search-query" name="s" type="search" placeholder="Type &amp; Hit Enter...">
+                        <button type="submit"><i class="ti-search"></i>
+                        </button>
+                    </form>
                 </div>
-                <p>{{ article.summary }}</p>
-                <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">
-                    Continue Reading
-                </a>
-            </div>
-        </article>
-        {% empty %}
-        <p class="text-center">No articles found.</p>
-        {% endfor %}
+                <div class="widget">
+                    <h5 class="widget-title"><span>Kategoriyalar</span></h5>
+                    <ul class="list-unstyled widget-list">
+                        {% for item in categories_with_count %}
+                        <li><a href="{% url 'category_articles' item.category.slug %}" class="d-flex">{{ item.category.name|title }}
+                            <small class="ml-auto">({{ item.count }})</small></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget">
+                    <h5 class="widget-title"><span>Teglar</span></h5>
+                    <ul class="list-inline widget-list-inline">
+                        {% for tag in random_tags %}
+                        <li class="list-inline-item"><a href="{% url 'tag_articles' tag.slug %}">{{ tag.name|title }}</a></li>
+                        {% empty %}
+                        <li class="list-inline-item">No tags available.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget">
+                    <h5 class="widget-title"><span>So'nggi Maqolalar</span></h5>
+                    <ul class="list-unstyled widget-list">
+                        {% for article in latest_articles %}
+                        <li class="media widget-post align-items-center">
+                            {% if article.photo %}
+                            <a href="{{ article.get_absolute_url }}">
+                            <img loading="lazy" class="mr-3" src="{{ article.photo.url }}" alt="{{ article.title }}">
+                            </a>
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="h6 mb-0"><a href="{{ article.get_absolute_url }}">{{ article.title|title }}</a></h5>
+                                <small>{{ article.date|date:"F j, Y" }}</small>
+                            </div>
+                        </li>
+                        {% empty %}
+                        <li class="list-inline-item">No articles available.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </aside>
+        </div>
     </div>
 </main>
 {% endblock %}
