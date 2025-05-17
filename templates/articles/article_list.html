@@ -6,6 +6,14 @@
     <div class="container">
         <div class="row">
             <section class="col-md-8">
+                
+                {% if search_query %}
+                <div class="mb-4">
+                    <h3>Search Results for "{{ search_query }}"</h3>
+                    <p>Found {{ object_list|length }} article{% if object_list|length != 1 %}s{% endif %}</p>
+                </div>
+                {% endif %}
+
                 {% for article in object_list %}
                 <article class="row mb-5">
                     <div class="col-12 mx-auto">
@@ -48,26 +56,76 @@
                 {% empty %}
                 <p class="text-center">No articles found.</p>
                 {% endfor %}
+
+                <!-- Pagination -->
+                {% if is_paginated %}
+                <nav aria-label="Page navigation" class="my-5">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&lsaquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&rsaquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
             </section>
             <aside class="col-md-4">
+                <!-- Search Widget -->
                 <div class="widget">
                     <h5 class="widget-title"><span>Search</span></h5>
-                    <form action="/logbook-hugo/search" class="widget-search">
-                        <input id="search-query" name="s" type="search" placeholder="Type &amp; Hit Enter...">
-                        <button type="submit"><i class="ti-search"></i>
-                        </button>
+                    <form action="{% url 'article_search' %}" method="get" class="widget-search">
+                        <input id="search-query" name="q" type="search" placeholder="Type &amp; Hit Enter..." 
+                               value="{{ search_query }}">
+                        <button type="submit"><i class="ti-search"></i></button>
                     </form>
                 </div>
+                <!-- Categories Widget -->
                 <div class="widget">
                     <h5 class="widget-title"><span>Kategoriyalar</span></h5>
                     <ul class="list-unstyled widget-list">
                         {% for item in categories_with_count %}
-                        <li><a href="{% url 'category_articles' item.category.slug %}" class="d-flex">{{ item.category.name|title }}
-                            <small class="ml-auto">({{ item.count }})</small></a>
-                        </li>
+                        <li><a href="{% url 'category_articles' item.category.slug %}" class="d-flex {% if item.category == current_category %}text-primary fw-bold{% endif %}">
+                            {{ item.category.name|title }} <small class="ml-auto">({{ item.count }})</small>
+                        </a></li>
+                        {% empty %}
+                        <li>No categories available.</li>
                         {% endfor %}
                     </ul>
                 </div>
+                <!-- Tags Widget -->
                 <div class="widget">
                     <h5 class="widget-title"><span>Teglar</span></h5>
                     <ul class="list-inline widget-list-inline">
@@ -78,6 +136,7 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <!-- Latest Articles Widget -->
                 <div class="widget">
                     <h5 class="widget-title"><span>So'nggi Maqolalar</span></h5>
                     <ul class="list-unstyled widget-list">

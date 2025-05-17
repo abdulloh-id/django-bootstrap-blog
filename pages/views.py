@@ -9,10 +9,6 @@ from .forms import AboutPageForm
 def contact_page(request):
     return render(request, 'contact.html')
 
-# View for the about page
-def about_page(request):
-    return render(request, 'about.html')
-
 # View for the author page
 def author_page(request):
     return render(request, 'author.html')
@@ -24,11 +20,6 @@ def privacy_policy_page(request):
 # View for the terms and conditions page
 def terms_conditions_page(request):
     return render(request, 'terms-conditions.html')
-
-    # View for the terms and conditions page
-def index_right(request):
-    return render(request, 'index-full-right.html')
-
 
 class AboutPageView(TemplateView):
     template_name = 'about_editable.html'

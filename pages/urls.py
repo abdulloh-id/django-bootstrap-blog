@@ -17,6 +17,4 @@ urlpatterns += [
     path('author/', views.author_page, name='author'),  # Author page
     path('privacy-policy/', views.privacy_policy_page, name='privacy-policy'),  # Privacy policy
     path('terms-conditions/', views.terms_conditions_page, name='terms-conditions'),  # Terms and conditions
-    path('index-right/', views.index_right, name='index-full-right'),  # Terms and conditions
-    # Add other views here
 ]

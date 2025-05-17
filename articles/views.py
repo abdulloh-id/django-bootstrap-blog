@@ -1,6 +1,6 @@
 # Django imports
 import random
-from django_comments import get_form
+from django.db.models import Q, Count
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, get_object_or_404
@@ -15,19 +15,19 @@ from django.views.generic import (
 )
 
 # Third-party imports
+from django_comments import get_form
 from django_comments.models import Comment
 
 # Local imports
 from .forms import ArticleForm, CrispyCommentForm
 from .models import Article, Category, Tag
 
-
-# New Paginated Homepage View
+# Paginated homepage view for displaying articles
 class HomepageView(ListView):
     model = Article
     template_name = 'home.html'  # Use your homepage template
     context_object_name = 'articles'  # This will make the context variable 'articles'
-    paginate_by = 5  # Number of articles per page
+    paginate_by = 10  # Number of articles per page
     ordering = ['-date']  # Order by most recent first
 
     def get_context_data(self, **kwargs):
@@ -35,96 +35,85 @@ class HomepageView(ListView):
         context['categories'] = Category.objects.all()
         return context
 
-# View to display a list of all articles
-class ArticleListView(ListView):
-    model = Article
-    template_name = 'article_list.html'
-
+# Mixin for sidebar context
+class SidebarContextMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        categories_with_count = []
-        for category in Category.objects.all():
-            count = category.articles.count()
-            categories_with_count.append({'category': category, 'count': count})
-        context['categories_with_count'] = categories_with_count
+        # Categories with article counts (optimized)
+        categories_with_count = Category.objects.annotate(count=Count('articles')).all()
+        context['categories_with_count'] = [
+            {'category': category, 'count': category.count}
+            for category in categories_with_count
+        ]
 
+        # Random tags (up to 10)
         all_tags = Tag.objects.all()
         context['random_tags'] = random.sample(list(all_tags), min(10, len(all_tags)))
 
+        # Latest 5 articles
         latest_articles = Article.objects.order_by('-date')[:5]
         context['latest_articles'] = latest_articles
 
         return context
 
-# View for articles by category
-class CategoryArticleListView(ListView):
+class ArticleListView(SidebarContextMixin, ListView):
     model = Article
     template_name = 'article_list.html'
-    context_object_name = 'articles'
-    
+    context_object_name = 'object_list'
+    paginate_by = 10
+    ordering = ['-date']
+
+class CategoryArticleListView(SidebarContextMixin, ListView):
+    model = Article
+    template_name = 'article_list.html'
+    context_object_name = 'object_list'
+    paginate_by = 10
+
     def get_queryset(self):
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Article.objects.filter(category=self.category).order_by('-date')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
         context['current_category'] = self.category
         return context
 
-# View for articles by tag
-class TagArticleListView(ListView):
+class TagArticleListView(SidebarContextMixin, ListView):
     model = Article
     template_name = 'article_list.html'
-    context_object_name = 'articles'
-    
+    context_object_name = 'object_list'
+    paginate_by = 10
+
     def get_queryset(self):
         self.tag = get_object_or_404(Tag, slug=self.kwargs['slug'])
         return Article.objects.filter(tags=self.tag).order_by('-date')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
         context['current_tag'] = self.tag
         return context
 
-# View to display the details of a single article
-class ArticleDetailView(DetailView):
+class SearchArticleView(SidebarContextMixin, ListView):
     model = Article
-    template_name = 'articles/article_detail.html'
-
+    template_name = 'article_list.html'
+    context_object_name = 'object_list'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q', '')
+        if query:
+            return Article.objects.filter(
+                Q(title__icontains=query) | 
+                Q(summary__icontains=query) | 
+                Q(body__icontains=query)
+            ).order_by('-date')
+        return Article.objects.none()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Explicitly provide CrispyCommentForm
-        context['form'] = CrispyCommentForm(target_object=self.object)
-        context['categories'] = Category.objects.all()
+        context['search_query'] = self.request.GET.get('q', '')
         return context
-
-# View to update an existing article
-class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Article
-    form_class = ArticleForm
-    template_name = 'articles/article_edit.html'
-
-    def test_func(self):
-        obj = self.get_object()
-        return obj.author == self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
-
-# View to delete an article
-class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Article
-    template_name = 'articles/article_delete.html'
-    success_url = reverse_lazy('home')
-
-    def test_func(self):
-        obj = self.get_object()
-        return obj.author == self.request.user
 
 # View to create a new article
 class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -143,6 +132,43 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
+# View to update an existing article
+class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'articles/article_edit.html'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+# View to display the details of a single article
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'articles/article_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Explicitly provide CrispyCommentForm
+        context['form'] = CrispyCommentForm(target_object=self.object)
+        context['categories'] = Category.objects.all()
+        return context
+
+# View to delete an article
+class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Article
+    template_name = 'articles/article_delete.html'
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user
 
 # View to delete comments by staff members
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

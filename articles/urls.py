@@ -9,6 +9,7 @@ from .views import (
     HomepageView,
     CategoryArticleListView,
     TagArticleListView,
+    SearchArticleView,
 )
 
 # Class-based views
@@ -23,4 +24,7 @@ urlpatterns = [
     # New URLs for category and tag filtering
     path('category/<slug:slug>/', CategoryArticleListView.as_view(), name='category_articles'),
     path('tag/<slug:slug>/', TagArticleListView.as_view(), name='tag_articles'),
+    
+    # Add search URL
+    path('search/', SearchArticleView.as_view(), name='article_search'),
 ]
