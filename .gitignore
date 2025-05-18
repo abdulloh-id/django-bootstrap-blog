@@ -19,13 +19,13 @@ venv/
 env/
 
 # IDE-specific project configuration directories.
-.idea/         # IntelliJ IDEA
-.vscode/       # Visual Studio Code
+.idea/
+.vscode/
 
 # Temporary files and logs.
-*.swp          # Swap files (e.g., from Vim).
-*.pyc          # Compiled Python files.
-*.log          # Application log files.
+*.swp
+*.pyc
+*.log
 
 # Executable files.
-*.exe          # Windows executable files.
+*.exe
