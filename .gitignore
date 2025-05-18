@@ -1,14 +1,31 @@
+# Environment configuration file.
 .env
+
+# Python bytecode cache directories.
 __pycache__/
+
+# Default SQLite database file (often for development).
 db.sqlite3
+
+# Directory for collected static files (CSS, JS, etc.).
 static/
+
+# Directory for user-uploaded media files (images, videos, etc.).
 media/
+
+# Common virtual environment directory names.
 venv/
 .venv/
 env/
-.idea/
-.vscode/
-*.swp
-*.pyc
-*.log
-*.exe
+
+# IDE-specific project configuration directories.
+.idea/         # IntelliJ IDEA
+.vscode/       # Visual Studio Code
+
+# Temporary files and logs.
+*.swp          # Swap files (e.g., from Vim).
+*.pyc          # Compiled Python files.
+*.log          # Application log files.
+
+# Executable files.
+*.exe          # Windows executable files.
