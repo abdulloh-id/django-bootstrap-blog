@@ -11,11 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
 import environ
 
+
+# Initialize environ
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env()  # This reads the .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +24,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-DEBUG = env.bool('DEBUG', default=False)
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-# DATABASES = {
-#     'default': env.db(),
-# }
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env.bool('DEBUG', default=False)
+
+# Database configuration using environment variables
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DJANGO_DB_NAME'),
+        'USER': env('DJANGO_DB_USER'),
+        'PASSWORD': env('DJANGO_DB_PASSWORD'),
+        'HOST': env('DJANGO_DB_HOST'),
+        'PORT': env('DJANGO_DB_PORT'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
+
+if DEBUG:
+    # During development, allow localhost and 127.0.0.1
+    ALLOWED_HOSTS = ['*']
+else:
+    # In production, use your actual domain names or IP addresses
+    # Get ALLOWED_HOSTS from an environment variable as a comma-separated list
+    ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
+    # If you also need to access it by IP during staging/testing:
+    # ALLOWED_HOSTS.append('your_server_ip_address')
 
 # Application definition
 
@@ -90,17 +114,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -119,7 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -151,11 +165,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-
 # Django Comments configuration
 COMMENTS_APP = "django_comments"
 COMMENTS_FORM = "articles.forms.CrispyCommentForm"
-
 
 # Showing email on the console
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -181,6 +193,7 @@ SITE_ID = 1
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
+# Rich text editor for Django
 TINYMCE_DEFAULT_CONFIG = {
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,

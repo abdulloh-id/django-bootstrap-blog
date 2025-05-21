@@ -6,37 +6,47 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 
 from accounts.models import Profile
+from .forms import CustomUserChangeForm, EditProfileForm
+from .models import Profile
 
 
-@login_required  # Requires user to be logged in to access this view.
+@login_required
 def edit_profile_view(request):
-    # Ensure a Profile exists for the logged-in user. Creates one if it doesn't.
+    # Ensure a Profile exists for the logged-in user
     try:
         profile = request.user.profile
     except ObjectDoesNotExist:
         profile = Profile.objects.create(user=request.user)
 
     if request.method == 'POST':
-        # Handle form submission for updating profile information.
-        user = request.user
-        user.first_name = request.POST.get('first_name')
-        user.last_name = request.POST.get('last_name')
-        user.email = request.POST.get('email')
-        user.birthdate = request.POST.get('birthdate')
-
-        # Update user's avatar if a new one was uploaded.
-        if 'avatar' in request.FILES:
-            profile.avatar = request.FILES['avatar']
-
-        # Save the updated user and profile information to the database.
-        user.save()
-        profile.save()
-
-        messages.success(request, 'Your profile has been updated!')
-        return redirect('accounts:edit_profile')  # Redirect to the edit profile page.
-
-    return render(request, 'accounts/edit_profile.html')  # Render the edit profile form.
-
+        # Initialize forms with POST data and instances
+        user_form = CustomUserChangeForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, request.FILES, instance=profile)
+        
+        # Validate both forms
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile has been updated!')
+            return redirect('accounts:edit_profile')
+        else:
+            # Display form errors
+            for field, errors in user_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+            for field, errors in profile_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+    else:
+        # Initialize forms for GET request
+        user_form = CustomUserChangeForm(instance=request.user)
+        profile_form = EditProfileForm(instance=profile)
+    
+    return render(request, 'accounts/edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+    
 @login_required  # Requires user to be logged in to access this view.
 def change_password(request):
     if request.method == 'POST':
