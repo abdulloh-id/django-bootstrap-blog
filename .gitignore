@@ -1,5 +1,6 @@
 # Environment configuration file.
 .env
+.dockerignore
 
 # Python bytecode cache directories.
 __pycache__/

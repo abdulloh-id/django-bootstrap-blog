@@ -25,25 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-fake-key-for-build-only')
+
+# For PostgreSQL on Render
+DATABASES = {
+    'default': env.db()  # This automatically parses DATABASE_URL
+}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
-
-# Database configuration using environment variables
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DJANGO_DB_NAME'),
-        'USER': env('DJANGO_DB_USER'),
-        'PASSWORD': env('DJANGO_DB_PASSWORD'),
-        'HOST': env('DJANGO_DB_HOST'),
-        'PORT': env('DJANGO_DB_PORT'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
-}
 
 if DEBUG:
     # During development, allow localhost and 127.0.0.1
@@ -52,8 +42,6 @@ else:
     # In production, use your actual domain names or IP addresses
     # Get ALLOWED_HOSTS from an environment variable as a comma-separated list
     ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
-    # If you also need to access it by IP during staging/testing:
-    # ALLOWED_HOSTS.append('your_server_ip_address')
 
 # Application definition
 
@@ -84,15 +72,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
 
 SOCIAL_LINKS = {
-    'facebook': 'https://facebook.com/',
-    'twitter': 'https://twitter.com/',
-    'linkedin': 'https://linkedin.com/in/',
-    'instagram': 'https://instagram.com/',
+    'facebook': env('SOCIAL_LINK_FACEBOOK', default=''), # Use default='' or raise error if missing
+    'twitter': env('SOCIAL_LINK_TWITTER', default=''),
+    'linkedin': env('SOCIAL_LINK_LINKEDIN', default=''),
+    'instagram': env('SOCIAL_LINK_INSTAGRAM', default=''),
 }
 
 TEMPLATES = [
@@ -172,17 +161,16 @@ COMMENTS_FORM = "articles.forms.CrispyCommentForm"
 # Showing email on the console
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-env = environ.Env()
-environ.Env.read_env()
-
 # Using real email service
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'outergamer11@gmail.com'  # Replace with your Gmail address
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'outergamer11@gmail.com'  # Replace with your Gmail address
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')  # Use an app-specific password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Get email credentials from environment variables
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='no-reply@example.com')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='no-reply@example.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
