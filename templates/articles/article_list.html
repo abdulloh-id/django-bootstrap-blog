@@ -47,7 +47,7 @@
                             </li>
                             {% endif %}
                         </ul>
-                        <p>{{ article.summary }}</p>
+                        <p>{{ article.summary|truncatechars:250 }}</p>
                         <a href="{% url 'article_detail' article.pk %}" class="btn btn-outline-primary">
                         Davomini o'qish
                         </a>

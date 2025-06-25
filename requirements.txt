@@ -10,6 +10,6 @@ gunicorn==20.0.4
 isort==6.0.1
 pillow==11.1.0
 sqlparse==0.5.3
+mysqlclient==2.2.7
 tzdata==2025.1
-whitenoise
-psycopg2-binary
+whitenoise==6.9.0

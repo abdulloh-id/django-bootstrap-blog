@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 
-                                <p class="card-text mb-4">{{ article.summary }}</p>
+                                <p class="card-text mb-4">{{ article.summary|truncatechars:250 }}</p>
                                 
                                 <div class="card-actions">
                                     <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary">

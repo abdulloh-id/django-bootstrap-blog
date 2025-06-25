@@ -27,9 +27,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-fake-key-for-build-only')
 
-# For PostgreSQL on Render
+# MySQL configuration using environment variables
 DATABASES = {
-    'default': env.db()  # This automatically parses DATABASE_URL
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('MYSQL_DATABASE', default='my_database'),
+        'USER': env('MYSQL_USER', default='admin'),
+        'PASSWORD': env('MYSQL_PASSWORD', default='admin_pass123'),
+        'HOST': env('MYSQL_HOST', default='localhost'),
+        'PORT': env('MYSQL_PORT', default='3306'),
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        },
+    }
 }
 
 # SECURITY WARNING: don't run with debug turned on in production!
