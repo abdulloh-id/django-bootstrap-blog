@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from articles.views import HomepageView  # Import HomepageView from articles app
-from .views import AboutPageView
-from . import views
+from articles.views import \
+    HomepageView  # Import HomepageView from articles app
 
+from . import views
+from .views import AboutPageView
 
 # URL patterns for class-based views.
 urlpatterns = [

@@ -1,7 +1,7 @@
 # Standard imports
 import random
-import environ
 
+import environ
 # Django and third-party imports
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -9,7 +9,7 @@ from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                 TemplateView, UpdateView)
+                                  TemplateView, UpdateView)
 from django_comments import get_form
 from django_comments.models import Comment
 

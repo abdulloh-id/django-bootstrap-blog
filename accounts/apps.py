@@ -1,5 +1,5 @@
-from django.apps import AppConfig
 import environ
+from django.apps import AppConfig
 
 
 class AccountsConfig(AppConfig):
@@ -37,8 +37,8 @@ class AccountsConfig(AppConfig):
     def update_site_info(self):
         """Update Django site information from environment variables"""
         try:
-            from django.contrib.sites.models import Site
             import environ
+            from django.contrib.sites.models import Site
             
             env = environ.Env()
             site, created = Site.objects.get_or_create(

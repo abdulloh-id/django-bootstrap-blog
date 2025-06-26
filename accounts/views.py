@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 
 from accounts.models import Profile
+
 from .forms import CustomUserChangeForm, EditProfileForm
 from .models import Profile
 

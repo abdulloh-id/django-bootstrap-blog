@@ -1,6 +1,8 @@
+import re
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Hidden, Layout, Submit
 from django import forms
+from django.utils.text import slugify
 from django_comments.forms import CommentForm as BaseCommentForm
 from tinymce.widgets import TinyMCE
 
@@ -16,6 +18,20 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ['title', 'summary', 'body', 'photo', 'category', 'tag_input'] # Form fields.
 
+    def clean_body(self):
+        body = self.cleaned_data.get('body')
+        if body:
+            body = re.sub(r'<p[^>]*>(\s|&nbsp;|<br\s*/?>)*</p>', '', body)
+            body = re.sub(r'<div[^>]*>(\s|&nbsp;|<br\s*/?>)*</div>', '', body)
+            body = re.sub(r'<h[1-6][^>]*>(\s|&nbsp;)*</h[1-6]>', '', body)
+            body = re.sub(r'(<br\s*/?>\s*){3,}', '<br><br>', body)
+            body = re.sub(r'(&nbsp;\s*)+', ' ', body)
+            body = re.sub(r'>\s+<', '><', body)
+            body = re.sub(r'\s{2,}', ' ', body)
+            body = body.strip()
+            body = re.sub(r'^(<br\s*/?>\s*)+|(<br\s*/?>\s*)+$', '', body)
+        return body
+
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance')
         super().__init__(*args, **kwargs)
@@ -30,7 +46,8 @@ class ArticleForm(forms.ModelForm):
             instance.tags.clear() # Remove old tags.
             tag_names = [t.strip() for t in self.cleaned_data['tag_input'].split(',') if t.strip()]
             for name in tag_names:
-                tag, _ = Tag.objects.get_or_create(name=name, defaults={'slug': name.lower().replace(' ', '-')})
+                slug = slugify(name)
+                tag, created = Tag.objects.get_or_create(name=name, defaults={'slug': slug})
                 instance.tags.add(tag) # Add new tags.
         return instance
 
