@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+import pymysql
+# Add this line to force the modern authentication plugin
+pymysql.install_as_MySQLdb()
+pymysql.connections.Connection.default_auth_plugin = 'caching_sha2_password'
+
 import os
 import sys
-
 
 def main():
     """Run administrative tasks."""

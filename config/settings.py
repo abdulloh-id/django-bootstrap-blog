@@ -9,14 +9,18 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
-
 import environ
 
-# Initialize environ
+# 1. This finds the folder where manage.py lives
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 2. Initialize
 env = environ.Env()
-environ.Env.read_env()  # This reads the .env file
+
+# 3. Explicitly tell it to look in the BASE_DIR for the .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,15 +34,14 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-fake-key-for-build-only'
 # MySQL configuration using environment variables
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('MYSQL_DATABASE', default='my_database'),
-        'USER': env('MYSQL_USER', default='admin'),
-        'PASSWORD': env('MYSQL_PASSWORD', default='admin_pass123'),
-        'HOST': env('MYSQL_HOST', default='localhost'),
-        'PORT': env('MYSQL_PORT', default='3306'),
+        'ENGINE': env('DB_ENGINE', default='django.db.backends.mysql'),
+        'NAME': env('DB_NAME'), 
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST', default='127.0.0.1'),
+        'PORT': env('DB_PORT', default='3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
-            'use_unicode': True,
         },
     }
 }
