@@ -27,12 +27,20 @@ def comment_redirect(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # 1. THE BIG CHANGE: Move articles to the root
+    path('', include('articles.urls')), 
+    
+    # 2. Authentication & Accounts
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('articles/', include('articles.urls')),
-    path('comments/', include('django_comments.urls')),  # Comments
-    path('comments/posted/', comment_redirect, name='comments-comment-done'),  # Comments redirect
-    path('', include('pages.urls')),
+    
+    # 3. Comments System
+    path('comments/', include('django_comments.urls')),
+    path('comments/posted/', comment_redirect, name='comments-comment-done'),
+    
+    # 4. Other static pages (About, Contact, etc.)
+    path('pages/', include('pages.urls')), 
 ]
 
 if settings.DEBUG:
