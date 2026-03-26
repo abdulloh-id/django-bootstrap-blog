@@ -43,7 +43,7 @@ def edit_profile_view(request):
         user_form = CustomUserChangeForm(instance=request.user)
         profile_form = EditProfileForm(instance=profile)
     
-    return render(request, 'accounts/edit_profile.html', {
+    return render(request, 'accounts/update.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })

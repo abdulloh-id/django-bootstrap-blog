@@ -9,23 +9,23 @@ from .models import AboutPage
 
 # View for the contact page.
 def contact_page(request):
-    return render(request, 'contact.html')
+    return render(request, 'pages/contact.html')
 
 # View for the author page.
 def author_page(request):
-    return render(request, 'author.html')
+    return render(request, 'pages/author.html')
 
 # View for the privacy policy page.
 def privacy_policy_page(request):
-    return render(request, 'privacy-policy.html')
+    return render(request, 'pages/privacy-policy.html')
 
 # View for the terms and conditions page.
 def terms_conditions_page(request):
-    return render(request, 'terms-conditions.html')
+    return render(request, 'pages/terms-conditions.html')
 
 # View for the editable About page.
 class AboutPageView(TemplateView):
-    template_name = 'about_editable.html'
+    template_name = 'pages/about_editable.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
