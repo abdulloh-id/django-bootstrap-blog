@@ -9,7 +9,8 @@ __pycache__/
 db.sqlite3
 
 # Directory for collected static files (CSS, JS, etc.).
-static/
+static/plugins/
+staticfiles/
 
 # Directory for user-uploaded media files (images, videos, etc.).
 media/
@@ -30,3 +31,6 @@ env/
 
 # Executable files.
 *.exe
+
+# Windows thumbnail cache
+Thumbs.db
