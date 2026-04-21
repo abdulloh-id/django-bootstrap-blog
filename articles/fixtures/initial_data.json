@@ -1,0 +1,42 @@
+[
+  {
+    "model": "articles.category",
+    "pk": 1,
+    "fields": {
+      "name": "Tech",
+      "slug": "tech"
+    }
+  },
+  {
+    "model": "articles.category",
+    "pk": 2,
+    "fields": {
+      "name": "Programming",
+      "slug": "programming"
+    }
+  },
+  {
+    "model": "articles.category",
+    "pk": 3,
+    "fields": {
+      "name": "Lifestyle",
+      "slug": "lifestyle"
+    }
+  },
+  {
+    "model": "articles.category",
+    "pk": 4,
+    "fields": {
+      "name": "Gastronomy",
+      "slug": "gastronomy"
+    }
+  },
+  {
+    "model": "articles.category",
+    "pk": 5,
+    "fields": {
+      "name": "General",
+      "slug": "general"
+    }
+  }
+]
