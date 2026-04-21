@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ArticleCreateView, ArticleDeleteView, ArticleDetailView,
     ArticleListView, ArticleUpdateView, CategoryArticleListView, 
-    CommentDeleteView, SearchArticleView, TagArticleListView
+    CommentDeleteView, SearchArticleView, TagArticleListView, tinymce_upload
 )
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('search/', SearchArticleView.as_view(), name='article_search'),
     path('category/<slug:slug>/', CategoryArticleListView.as_view(), name='category_articles'),
     path('tag/<slug:slug>/', TagArticleListView.as_view(), name='tag_articles'),
+    
 
     # 2. CRUD Paths (Create, Read, Update, Delete)
     path('new/', ArticleCreateView.as_view(), name='article_new'),
@@ -20,4 +21,5 @@ urlpatterns = [
 
     # 3. Specialized Paths
     path('comments/<int:comment_id>/delete/', CommentDeleteView.as_view(), name='delete_comment'),
+    path('tinymce/upload/', tinymce_upload, name='tinymce_upload'),
 ]

@@ -1,4 +1,5 @@
 # Standard imports
+import os
 import random
 
 import environ
@@ -12,14 +13,35 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from django_comments import get_form
 from django_comments.models import Comment
+from django.http import JsonResponse
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # Local imports
 from .forms import ArticleForm, CrispyCommentForm
 from .models import Article, Category, Tag
 
+
 # Initialize environ once at module level
 env = environ.Env()
 environ.Env.read_env()  # This reads the .env file
+
+@csrf_exempt # TinyMCE sends its own request, so we exempt CSRF for this specific view
+def tinymce_upload(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        img = request.FILES['file']
+        # Define where to save
+        path = os.path.join(settings.MEDIA_ROOT, 'tinymce', img.name)
+        
+        # Save file to disk
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'wb+') as destination:
+            for chunk in img.chunks():
+                destination.write(chunk)
+        
+        # Return the URL for TinyMCE to insert into the HTML
+        return JsonResponse({'location': f"{settings.MEDIA_URL}tinymce/{img.name}"})
+    return JsonResponse({'error': 'Failed to upload'}, status=400)
 
 # Mixin to add sidebar context data.
 class SidebarContextMixin:
@@ -57,9 +79,15 @@ class CategoryArticleListView(SidebarContextMixin, ListView):
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Article.objects.filter(category=self.category).order_by('-date')
 
+    # In views.py -> CategoryArticleListView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_category'] = self.category  # Current category for template.
+        # Match the Mixin's naming convention: 'article_count'
+        context['categories_with_count'] = Category.objects.annotate(
+            article_count=Count('articles') # Use 'articles' (related name) and 'article_count'
+        ).filter(article_count__gt=0)
+        
+        context['random_tags'] = Tag.objects.all()[:10]
         return context
 
 # View to list articles tagged with a specific tag.

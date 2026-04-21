@@ -199,12 +199,18 @@ MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
 # Rich text editor for Django
 TINYMCE_DEFAULT_CONFIG = {
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'silver',
-    'plugins': 'lists, emoticons, link',  # Added 'quote' and 'hr'
-    'toolbar1': 'bold italic bullist blockquote hr link',  # Added 'blockquote' and 'hr'
-    'menubar': False,
-    'statusbar': False,
+    'height': 450,
+    'menubar': False,  # This removes 'File', 'Edit', 'View', etc.
+    'statusbar': True,
+    'plugins': 'lists, link, image, media, table, code, wordcount',
+    'toolbar': (
+        'undo redo | formatselect | bold italic | '
+        'bullist numlist | blockquote hr | '
+        'link image media table | code'
+    ),
+    # This prevents users from picking random fonts/colors
+    'block_formats': 'Paragraph=p; Heading 2=h2; Heading 3=h3; Quote=blockquote',
+    'images_upload_url': '/tinymce/upload/',  # Points to our new view
+    'automatic_uploads': True,
+    'file_picker_types': 'image',
 }
