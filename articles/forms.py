@@ -17,7 +17,10 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ['title', 'summary', 'body', 'photo', 'category', 'tag_input'] # Form fields.
-
+        labels = {
+                'photo': 'Thumbnail',
+            }
+            
     def clean_body(self):
         body = self.cleaned_data.get('body')
         if body:
@@ -37,6 +40,14 @@ class ArticleForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if instance:
             self.initial['tag_input'] = ', '.join(t.name for t in instance.tags.all()) # Show existing tags.
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # This ensures the dropdown gets the Bootstrap 4 styling
+        self.fields['category'].widget.attrs.update({'class': 'form-control'})
+        
+        # Optional: Add a custom height or padding if it still looks small
+        self.fields['category'].widget.attrs.update({'style': 'height: calc(2.25rem + 2px);'})
 
     def save(self, commit=True):
         instance = super().save(commit=False)

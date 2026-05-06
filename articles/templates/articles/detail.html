@@ -21,16 +21,7 @@
                 </div>
 
                 <h1 class="h2 mb-3">{{ object.title }}</h1>
-                <div class="content mb-3">
-                    {{ object.summary|safe }}
-                </div>
             </div>
-
-            {% if object.photo %}
-                <div class="post-slider">
-                    <img src="{{ object.photo.url }}" class="img-fluid" alt="{{ object.title }}" loading="lazy">
-                </div>
-            {% endif %}
 
             <div class="content text-justify">
                 {{ object.body|safe }}

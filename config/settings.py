@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # external apps
     'crispy_forms',
-    'crispy_bootstrap5',
+    'crispy_bootstrap4',
     'tinymce',
     'django.contrib.sites',
     'django_comments',
@@ -167,8 +167,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Crispy Forms configuration
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Django Comments configuration
 COMMENTS_APP = "django_comments"
