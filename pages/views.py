@@ -29,24 +29,19 @@ def contact_view(request):
                     label = form.fields[field].label or field.capitalize()
                     form_errors.append(f"{label}: {error}")
             
-            # ИСПРАВЛЕНО: добавлен префикс папки 'pages/'
             return render(request, 'pages/contact.html', {
                 'form': request.POST,
                 'form_errors': form_errors
             })
             
-    # ИСПРАВЛЕНО: добавлен префикс папки 'pages/'
     return render(request, 'pages/contact.html')
 
-# View for the privacy policy page.
 def privacy_policy_page(request):
     return render(request, 'pages/privacy-policy.html')
 
-# View for the terms and conditions page.
 def terms_conditions_page(request):
     return render(request, 'pages/terms-conditions.html')
 
-# View for the editable About page.
 class AboutPageView(TemplateView):
     template_name = 'pages/about_editable.html'
 
@@ -61,7 +56,6 @@ class AboutPageView(TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        # Permission check for editing.
         if not (request.user.is_staff or request.user.is_superuser):
             messages.error(request, _("You don't have permission to edit this page."))
             return redirect('about')
@@ -75,5 +69,5 @@ class AboutPageView(TemplateView):
             return redirect('about')
         else:
             context = self.get_context_data(**kwargs)
-            context['form'] = form # Include invalid form in context.
+            context['form'] = form
             return render(request, self.template_name, context)

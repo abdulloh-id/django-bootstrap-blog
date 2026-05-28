@@ -10,12 +10,10 @@ class AboutPageForm(forms.ModelForm):
         model = AboutPage
         fields = ['photo', 'body']
         
-        # Переносим разметку лейблов сюда
         labels = {
             'photo': _('Profile Photo'),
             'body': _('About Content'),
         }
-        # Переносим виджет TinyMCE сюда, чтобы не ломать labels
         widgets = {
             'body': TinyMCE(),
         }

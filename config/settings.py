@@ -84,17 +84,6 @@ INSTALLED_APPS = [
     'articles',
 ]
 
-# 2. Configure Languages
-USE_I18N = True
-
-LANGUAGE_CODE = 'uz'  # Default language
-
-LANGUAGES = [
-    ('uz', _('Uzbek')),
-    ('ru', _('Russian')),
-    ('en', _('English')),
-]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -107,7 +96,20 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-# 4. Set where translation binaries live
+# Internationalization
+LANGUAGE_CODE = 'uz'
+
+LANGUAGES = [
+    ('uz', _('Uzbek')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
+]
+
+USE_I18N = True
+USE_TZ = True
+
+TIME_ZONE = 'Asia/Tashkent'
+
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
@@ -123,7 +125,7 @@ MESSAGE_TAGS = {
 }
 
 SOCIAL_LINKS = {
-    'facebook': env('SOCIAL_LINK_FACEBOOK', default=''), # Use default='' or raise error if missing
+    'facebook': env('SOCIAL_LINK_FACEBOOK', default=''),
     'twitter': env('SOCIAL_LINK_TWITTER', default=''),
     'linkedin': env('SOCIAL_LINK_LINKEDIN', default=''),
     'instagram': env('SOCIAL_LINK_INSTAGRAM', default=''),
@@ -132,7 +134,6 @@ SOCIAL_LINKS = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Modern, clean path syntax
         'DIRS': [BASE_DIR / 'templates'], 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -171,17 +172,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'Asia/Tashkent'
-
-USE_I18N = True
-
-USE_TZ = True
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -205,7 +195,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 COMMENTS_APP = "django_comments"
 COMMENTS_FORM = "articles.forms.CrispyCommentForm"
 
-# Showing email on the console
+# Showing email on the console (for development)
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Using real email service
@@ -231,7 +221,7 @@ MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 # Rich text editor for Django
 TINYMCE_DEFAULT_CONFIG = {
     'height': 450,
-    'menubar': False,  # This removes 'File', 'Edit', 'View', etc.
+    'menubar': False,
     'statusbar': True,
     'plugins': 'lists, link, image, media, table, code, wordcount',
     'toolbar': (
@@ -239,9 +229,9 @@ TINYMCE_DEFAULT_CONFIG = {
         'bullist numlist | blockquote hr | '
         'link image media table | code'
     ),
-    # This prevents users from picking random fonts/colors
+    # Prevent users from picking random fonts/colors
     'block_formats': 'Paragraph=p; Heading 2=h2; Heading 3=h3; Quote=blockquote',
-    'images_upload_url': '/tinymce/upload/',  # Points to our new view
+    'images_upload_url': '/tinymce/upload/',
     'automatic_uploads': True,
     'file_picker_types': 'image',
 }

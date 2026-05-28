@@ -4,15 +4,15 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class AboutPage(models.Model):
-    photo = models.ImageField(upload_to='about/', blank=True, null=True) # Optional image for the about page.
-    body = models.TextField() # Main content of the about page.
+    photo = models.ImageField(upload_to='about/', blank=True, null=True)
+    body = models.TextField()
 
     class Meta:
-        verbose_name = "About Page" # Singular name for the admin interface.
-        verbose_name_plural = "About Page" # Plural name for the admin interface.
+        verbose_name = "About Page"
+        verbose_name_plural = "About Page"
 
     def __str__(self):
-        return "About Page Content" # Human-readable representation.
+        return "About Page Content"
 
 class ContactMessage(models.Model):
     name = models.CharField(_("Your Name"), max_length=100)

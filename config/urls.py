@@ -34,19 +34,11 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-    
-    # 1. THE BIG CHANGE: Move articles to the root
     path('', include('articles.urls')), 
-    
-    # 2. Authentication & Accounts
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    
-    # 3. Comments System
     path('comments/', include('django_comments.urls')),
     path('comments/posted/', comment_redirect, name='comments-comment-done'),
-    
-    # 4. Other static pages (About, Contact, etc.)
     path('pages/', include('pages.urls')), 
 )
 

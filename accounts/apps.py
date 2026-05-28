@@ -6,6 +6,4 @@ class AccountsConfig(AppConfig):
     name = 'accounts'
 
     def ready(self):
-        # We removed the automatic user creation to prevent 
-        # connection errors during migrations.
         pass

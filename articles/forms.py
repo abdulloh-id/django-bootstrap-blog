@@ -4,8 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Hidden, Layout, Submit
 from django import forms
 from django.utils.text import slugify
-from django.utils.translation import \
-    gettext_lazy as _  # Dynamic translation module
+from django.utils.translation import gettext_lazy as _
 from django_comments.forms import CommentForm as BaseCommentForm
 from tinymce.widgets import TinyMCE
 
@@ -13,7 +12,6 @@ from .models import Article, Category, Tag
 
 
 class ArticleForm(forms.ModelForm):
-    # Translated labels, help texts, and placeholders for extra fields
     body = forms.CharField(
         widget=TinyMCE(), 
         label=_('Body')
@@ -29,7 +27,6 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ['title', 'summary', 'body', 'photo', 'category', 'tag_input']
         
-        # Translated labels for fields managed implicitly by the ModelForm
         labels = {
             'title': _('Title'),
             'summary': _('Summary'),
@@ -55,11 +52,9 @@ class ArticleForm(forms.ModelForm):
         instance = kwargs.get('instance')
         super().__init__(*args, **kwargs)
         
-        # 1. FIXED: Pre-populate tags on edit mode safely here
         if instance and instance.pk:
             self.initial['tag_input'] = ', '.join(t.name for t in instance.tags.all())
 
-        # 2. Apply Bootstrap styling & adjustments cleanly
         if 'category' in self.fields:
             self.fields['category'].widget.attrs.update({
                 'class': 'form-control',
@@ -85,7 +80,6 @@ class CrispyCommentForm(BaseCommentForm):
         super().__init__(*args, **kwargs)
         self.fields = {f: self.fields[f] for f in ['content_type', 'object_pk', 'timestamp', 'security_hash', 'comment', 'name', 'email']}
         
-        # Translate default widget field labels for comment systems
         self.fields['comment'].label = _('Comment')
         self.fields['name'].label = _('Name')
         self.fields['email'].label = _('Email')
@@ -101,5 +95,5 @@ class CrispyCommentForm(BaseCommentForm):
             'comment',
             'name',
             'email',
-            Submit('submit', _('Submit Comment'), css_class='btn btn-success')  # Translated submit button key
+            Submit('submit', _('Submit Comment'), css_class='btn btn-success')
         )

@@ -11,7 +11,6 @@ urlpatterns = [
     path('search/', SearchArticleView.as_view(), name='article_search'),
     path('category/<slug:slug>/', CategoryArticleListView.as_view(), name='category_articles'),
     path('tag/<slug:slug>/', TagArticleListView.as_view(), name='tag_articles'),
-    
 
     # 2. CRUD Paths (Create, Read, Update, Delete)
     path('new/', ArticleCreateView.as_view(), name='article_new'),
