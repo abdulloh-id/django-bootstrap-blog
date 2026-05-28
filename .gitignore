@@ -9,7 +9,6 @@ __pycache__/
 db.sqlite3
 
 # Directory for collected static files (CSS, JS, etc.).
-static/plugins/
 staticfiles/
 
 # Directory for user-uploaded media files (images, videos, etc.).
