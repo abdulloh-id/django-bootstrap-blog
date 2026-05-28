@@ -1,6 +1,7 @@
 # compile_po.py
 import os
 import sys
+
 import polib
 
 # List of languages you want to compile

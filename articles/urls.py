@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import (
-    ArticleCreateView, ArticleDeleteView, ArticleDetailView,
-    ArticleListView, ArticleUpdateView, CategoryArticleListView, 
-    CommentDeleteView, SearchArticleView, TagArticleListView, tinymce_upload
-)
+
+from .views import (ArticleCreateView, ArticleDeleteView, ArticleDetailView,
+                    ArticleListView, ArticleUpdateView,
+                    CategoryArticleListView, CommentDeleteView,
+                    SearchArticleView, TagArticleListView, tinymce_upload)
 
 urlpatterns = [
     # 1. Global / Navigation Paths

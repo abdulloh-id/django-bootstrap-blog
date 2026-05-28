@@ -1,7 +1,9 @@
 from django import forms
-from tinymce.widgets import TinyMCE
 from django.utils.translation import gettext_lazy as _
+from tinymce.widgets import TinyMCE
+
 from .models import AboutPage
+
 
 class AboutPageForm(forms.ModelForm):
     class Meta:

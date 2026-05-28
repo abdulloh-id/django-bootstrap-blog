@@ -3,24 +3,23 @@ import os
 import random
 
 import environ
+from django.conf import settings
 # Django and third-party imports
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count, Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from django_comments import get_form
 from django_comments.models import Comment
-from django.http import JsonResponse
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 
 # Local imports
 from .forms import ArticleForm, CrispyCommentForm
 from .models import Article, Category, Tag
-
 
 # Initialize environ once at module level
 env = environ.Env()

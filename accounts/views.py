@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -6,9 +7,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm, EditProfileForm
+from .forms import (CustomUserChangeForm, CustomUserCreationForm,
+                    EditProfileForm)
 from .models import Profile
-from django.conf import settings
 
 
 @login_required

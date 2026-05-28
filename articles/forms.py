@@ -1,9 +1,11 @@
 import re
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Hidden, Layout, Submit
 from django import forms
 from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _  # Dynamic translation module
+from django.utils.translation import \
+    gettext_lazy as _  # Dynamic translation module
 from django_comments.forms import CommentForm as BaseCommentForm
 from tinymce.widgets import TinyMCE
 

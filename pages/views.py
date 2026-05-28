@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
@@ -7,8 +8,6 @@ from django.views.generic import TemplateView
 
 from .forms import AboutPageForm, ContactForm
 from .models import AboutPage, ContactMessage
-
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 # Create your models here.
 class AboutPage(models.Model):
     photo = models.ImageField(upload_to='about/', blank=True, null=True) # Optional image for the about page.
