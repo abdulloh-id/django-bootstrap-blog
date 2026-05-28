@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Hidden, Layout, Submit
 from django import forms
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _  # Dynamic translation module
 from django_comments.forms import CommentForm as BaseCommentForm
 from tinymce.widgets import TinyMCE
 
@@ -10,16 +11,29 @@ from .models import Article, Category, Tag
 
 
 class ArticleForm(forms.ModelForm):
-    body = forms.CharField(widget=TinyMCE()) # Rich text editor.
-    tag_input = forms.CharField(required=False, label='Tags', help_text='Comma-separated.',
-                                widget=forms.TextInput(attrs={'placeholder': 'tag1, tag2, tag3'})) # Input for tags.
+    # Translated labels, help texts, and placeholders for extra fields
+    body = forms.CharField(
+        widget=TinyMCE(), 
+        label=_('Body')
+    )
+    tag_input = forms.CharField(
+        required=False, 
+        label=_('Tags'), 
+        help_text=_('Comma-separated.'),
+        widget=forms.TextInput(attrs={'placeholder': _('tag1, tag2, tag3')})
+    )
 
     class Meta:
         model = Article
-        fields = ['title', 'summary', 'body', 'photo', 'category', 'tag_input'] # Form fields.
+        fields = ['title', 'summary', 'body', 'photo', 'category', 'tag_input']
+        
+        # Translated labels for fields managed implicitly by the ModelForm
         labels = {
-                'photo': 'Thumbnail',
-            }
+            'title': _('Title'),
+            'summary': _('Summary'),
+            'photo': _('Thumbnail'),
+            'category': _('Category'),
+        }
             
     def clean_body(self):
         body = self.cleaned_data.get('body')
@@ -38,34 +52,42 @@ class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance')
         super().__init__(*args, **kwargs)
-        if instance:
-            self.initial['tag_input'] = ', '.join(t.name for t in instance.tags.all()) # Show existing tags.
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # This ensures the dropdown gets the Bootstrap 4 styling
-        self.fields['category'].widget.attrs.update({'class': 'form-control'})
         
-        # Optional: Add a custom height or padding if it still looks small
-        self.fields['category'].widget.attrs.update({'style': 'height: calc(2.25rem + 2px);'})
+        # 1. FIXED: Pre-populate tags on edit mode safely here
+        if instance and instance.pk:
+            self.initial['tag_input'] = ', '.join(t.name for t in instance.tags.all())
+
+        # 2. Apply Bootstrap styling & adjustments cleanly
+        if 'category' in self.fields:
+            self.fields['category'].widget.attrs.update({
+                'class': 'form-control',
+                'style': 'height: calc(2.25rem + 2px);'
+            })
 
     def save(self, commit=True):
         instance = super().save(commit=False)
         if commit:
             instance.save()
         if 'tag_input' in self.cleaned_data and self.cleaned_data['tag_input']:
-            instance.tags.clear() # Remove old tags.
+            instance.tags.clear()
             tag_names = [t.strip() for t in self.cleaned_data['tag_input'].split(',') if t.strip()]
             for name in tag_names:
                 slug = slugify(name)
                 tag, created = Tag.objects.get_or_create(name=name, defaults={'slug': slug})
-                instance.tags.add(tag) # Add new tags.
+                instance.tags.add(tag)
         return instance
+
 
 class CrispyCommentForm(BaseCommentForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields = {f: self.fields[f] for f in ['content_type', 'object_pk', 'timestamp', 'security_hash', 'comment', 'name', 'email']} # Keep these.
+        self.fields = {f: self.fields[f] for f in ['content_type', 'object_pk', 'timestamp', 'security_hash', 'comment', 'name', 'email']}
+        
+        # Translate default widget field labels for comment systems
+        self.fields['comment'].label = _('Comment')
+        self.fields['name'].label = _('Name')
+        self.fields['email'].label = _('Email')
+        
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
         self.helper.form_action = 'comments-post-comment'
@@ -77,5 +99,5 @@ class CrispyCommentForm(BaseCommentForm):
             'comment',
             'name',
             'email',
-            Submit('submit', 'Izoh Qoldirish', css_class='btn btn-success') # Submit button.
+            Submit('submit', _('Submit Comment'), css_class='btn btn-success')  # Translated submit button key
         )

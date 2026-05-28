@@ -1,62 +1,79 @@
-{% load static %}
+{% load static i18n %}
 
 <header class="sticky-top bg-white border-bottom border-default">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-white">
+        <nav class="navbar navbar-expand-lg navbar-white px-0">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img class="img-fluid" width="150px" src="{% static 'images/logo.png' %}" alt="LogBook">
             </a>
-            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
+            
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="ti-menu"></i>
             </button>
+            
             <div class="collapse navbar-collapse text-center" id="navigation">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">{% trans "Home" %}</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'article_new' %}">Create Post</a>
+                        <a class="nav-link" href="{% url 'article_new' %}">{% trans "Create Post" %}</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                        <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">Pages <i class="ti-angle-down ml-1"></i>
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% trans "Pages" %} <i class="ti-angle-down ml-1"></i>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'contact' %}">Contact</a>
-                            <a class="dropdown-item" href="{% url 'privacy-policy' %}">Privacy Policy</a>
-                            <a class="dropdown-item" href="{% url 'terms-conditions' %}">Terms Conditions</a>
+                            <a class="dropdown-item" href="{% url 'contact' %}">{% trans "Contact" %}</a>
+                            <a class="dropdown-item" href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a>
+                            <a class="dropdown-item" href="{% url 'terms-conditions' %}">{% trans "Terms Conditions" %}</a>
                         </div>
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav align-items-center">
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="ti-user"></i> {{ user.username }} <i class="ti-angle-down ml-1"></i>
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-user mr-1"></i>{{ user.username }} <i class="ti-angle-down ml-1"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{% url 'accounts:edit_profile' %}">Profil</a>
+                            <a class="dropdown-item" href="{% url 'accounts:edit_profile' %}">{% trans "Profile" %}</a>
                             <div class="dropdown-divider"></div>
-                            <form method="post" action="{% url 'logout' %}">
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
                                 {% csrf_token %}
-                                <button type="submit" class="text-decoration-none dropdown-item">Chiqish</button>
+                                <button type="submit" class="dropdown-item border-0 bg-transparent">{% trans "Logout" %}</button>
                             </form>
                         </div>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'login' %}">{% trans "Login" %}</a>
                     </li>
                     {% endif %}
+                    
+                    <li class="nav-item dropdown ml-lg-3 mt-3 mt-lg-0">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-world mr-1"></i>
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {{ LANGUAGE_CODE|upper }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.path }}">
+                                <button type="submit" name="language" value="uz" class="dropdown-item {% if LANGUAGE_CODE == 'uz' %}active{% endif %}">O'zbekcha</button>
+                                <button type="submit" name="language" value="ru" class="dropdown-item {% if LANGUAGE_CODE == 'ru' %}active{% endif %}">Русский</button>
+                                <button type="submit" name="language" value="en" class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}">English</button>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
-                
             </div>
         </nav>
     </div>

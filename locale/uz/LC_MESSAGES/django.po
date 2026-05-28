@@ -1,0 +1,1107 @@
+# Uzbek translations for Django Auth
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Change Password"
+msgstr "Parolni oʻzgartirish"
+
+msgid "Enter your current password, then your new password twice."
+msgstr "Avval eski parolni, keyin yangi parolni ikki marta kiriting."
+
+msgid "Update Password"
+msgstr "Parolni yangilash"
+
+msgid "Back to Profile"
+msgstr "Profilga qaytish"
+
+msgid "Forgot your password?"
+msgstr "Parolni unutdingizmi?"
+
+msgid "Password Tips"
+msgstr "Parol bo'yicha maslahatlar"
+
+msgid "Use at least 8 characters"
+msgstr "Kamida 8 ta belgidan foydalaning"
+
+msgid "Mix uppercase and lowercase letters"
+msgstr "Katta va kichik harflarni aralashtiring"
+
+msgid "Include numbers and symbols (!@#$%^&*)"
+msgstr "Raqamlar va maxsus belgilardan foydalaning (!@#$%^&*)"
+
+msgid "Avoid personal information or common words"
+msgstr "Shaxsiy ma'lumotlar yoki oddiy so'zlardan foydalanmang"
+
+msgid "Sign In"
+msgstr "Kirish"
+
+msgid "Welcome Back"
+msgstr "Xush kelibsiz"
+
+msgid "Enter your credentials to access your account"
+msgstr "Hisobingizga kirish uchun ma'lumotlaringizni kiriting"
+
+msgid "Remember me"
+msgstr "Meni eslab qol"
+
+msgid "Having trouble?"
+msgstr "Muammo bormi?"
+
+msgid "Contact Support"
+msgstr "Yordam markazi"
+
+msgid "Don't have an account?"
+msgstr "Hisobingiz yo'qmi?"
+
+msgid "Create one now"
+msgstr "Hozir yarating"
+
+msgid "Password Updated!"
+msgstr "Parol yangilandi!"
+
+msgid ""
+"Your password has been changed successfully. You can now sign in with your "
+"new password."
+msgstr ""
+"Parolingiz muvaffaqiyatli o'zgartirildi. Endi yangi parolingiz bilan "
+"kirishingiz mumkin."
+
+msgid "Go to Homepage"
+msgstr "Bosh sahifaga o'tish"
+
+msgid ""
+"For security, please remember your new password or store it in a safe place."
+msgstr ""
+"Xavfsizlik uchun yangi parolingizni eslab qoling yoki xavfsiz joyga yozib "
+"qo'ying."
+
+msgid "Password Reset Email Sent"
+msgstr "Parolni tiklash xabari yuborildi"
+
+msgid "Check Your Email"
+msgstr "Email manzilingizni tekshiring"
+
+msgid ""
+"We've emailed you instructions for setting your password. You should receive"
+" them shortly."
+msgstr ""
+"Parolni o'rnatish bo'yicha ko'rsatmalarni emailingizga yubordik. Tez orada "
+"yetib keladi."
+
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Agar xat kelmasa, ro'yxatdan o'tgan email manzilingizni tekshiring va spam "
+"papkasiga qarang."
+
+msgid "Back to Login"
+msgstr "Kirish sahifasiga qaytish"
+
+msgid "Resend Email"
+msgstr "Qayta yuborish"
+
+msgid "Password Reset Complete"
+msgstr "Parol tiklandi"
+
+msgid "Password Reset Successful!"
+msgstr "Parol muvaffaqiyatli yangilandi!"
+
+msgid ""
+"Your password has been set successfully. You can now log in with your new "
+"password."
+msgstr ""
+"Parolingiz muvaffaqiyatli o'rnatildi. Endi yangi parolingiz bilan tizimga "
+"kirishingiz mumkin."
+
+msgid "Sign In Now"
+msgstr "Hozir kirish"
+
+msgid "Keep your new password secure and don't share it with anyone."
+msgstr "Yangi parolingizni xavfsiz saqlang va hech kimga bermang."
+
+msgid "Set New Password"
+msgstr "Yangi parol o'rnatish"
+
+msgid ""
+"Please enter your new password twice so we can verify you typed it "
+"correctly."
+msgstr ""
+"Iltimos, yangi parolni ikki marta kiriting (to'g'ri yozilganini tekshirish "
+"uchun)."
+
+msgid "Password Requirements"
+msgstr "Parol talablari"
+
+msgid "Forgot Password?"
+msgstr "Parolni unutdingizmi?"
+
+msgid ""
+"Enter your email address below and we'll send you instructions to reset your"
+" password."
+msgstr ""
+"Quyida email manzilingizni kiriting, parolni tiklash bo'yicha ko'rsatmalarni"
+" yuboramiz."
+
+msgid ""
+"If an account exists with this email, you will receive a password reset link"
+" shortly."
+msgstr ""
+"Agar bu email bilan hisob mavjud bo'lsa, tez orada parol tiklash havolasini "
+"olasiz."
+
+msgid "Send Reset Link"
+msgstr "Tiklash havolasini yuborish"
+
+msgid "Need Help?"
+msgstr "Yordam kerakmi?"
+
+# Footer
+msgid "LogBook - Personal Blog"
+msgstr "LogBook - Shaxsiy Blog"
+
+# --- From footer.html ---
+msgid ""
+"A personal blog template built with Django and Bootstrap. Share your "
+"stories, ideas, and expertise with the world."
+msgstr ""
+"Django va Bootstrap yordamida yaratilgan shaxsiy blog andozasi. "
+"Hikoyalaringiz, gʻoyalaringiz va tajribangizni dunyo bilan baham koʻring."
+
+msgid "Quick Links"
+msgstr "Tezkor havolalar"
+
+msgid "About"
+msgstr "Biz haqimizda"
+
+msgid "Contact"
+msgstr "Aloqa"
+
+msgid "Privacy Policy"
+msgstr "Maxfiylik siyosati"
+
+msgid "Terms & Conditions"
+msgstr "Foydalanish shartlari"
+
+msgid "Follow Us"
+msgstr "Bizni kuzatib boring"
+
+# --- From author.html ---
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Visit our Facebook page"
+msgstr "Facebook sahifamizga tashrif buyuring"
+
+msgid "Twitter"
+msgstr "Twitter"
+
+msgid "Visit our Twitter profile"
+msgstr "Twitter profilimizga tashrif buyuring"
+
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+msgid "Visit our LinkedIn page"
+msgstr "LinkedIn sahifamizga tashrif buyuring"
+
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid "Visit our Instagram profile"
+msgstr "Instagram profilimizga tashrif buyuring"
+
+msgid "GitHub"
+msgstr "GitHub"
+
+msgid "Visit our GitHub repository"
+msgstr "GitHub repozitoriyamizga tashrif buyuring"
+
+msgid "Scroll to top"
+msgstr "Yuqoriga chiqish"
+
+msgid "Back to top"
+msgstr "Yuqoriga qaytish"
+
+msgid "All rights reserved."
+msgstr "Barcha huquqlar himoyalangan."
+
+# Sign up
+msgid "Sign Up"
+msgstr "Roʻyxatdan oʻtish"
+
+msgid "Create Account"
+msgstr "Hisob yaratish"
+
+msgid "Fill in the details below to register"
+msgstr "Roʻyxatdan oʻtish uchun quyidagi maʼlumotlarni toʻldiring"
+
+msgid "I have read and agree to the"
+msgstr "Men shartlar bilan tanishdim va roziman:"
+
+# --- From terms-conditions.html ---
+msgid "Terms of Service"
+msgstr "Foydalanish shartlari"
+
+msgid "and"
+msgstr "va"
+
+msgid "Already have an account?"
+msgstr "Sizda allaqachon hisob bormi?"
+
+msgid "Log in"
+msgstr "Tizimga kirish"
+
+msgid "Personal Information"
+msgstr "Shaxsiy ma'lumotlar"
+
+msgid "First Name"
+msgstr "Ism"
+
+msgid "Last Name"
+msgstr "Familiya"
+
+msgid "Email Address"
+msgstr "Elektron pochta manzili"
+
+msgid "Date of Birth"
+msgstr "Tugʻilgan sana"
+
+msgid "Profile Picture"
+msgstr "Profil rasmi"
+
+msgid "Recommended size: 300x300 pixels"
+msgstr "Tavsiya etilgan oʻlcham: 300x300 piksel"
+
+msgid "Save Changes"
+msgstr "Oʻzgarishlarni saqlash"
+
+msgid "Current Password"
+msgstr "Joriy parol"
+
+msgid "New Password"
+msgstr "Yangi parol"
+
+msgid "Confirm New Password"
+msgstr "Yangi parolni tasdiqlang"
+
+# Create article
+msgid "New Post"
+msgstr "Yangi maqola"
+
+msgid "Please fix the following errors:"
+msgstr "Iltimos, quyidagi xatolarni tuzating:"
+
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+msgid "Save"
+msgstr "Saqlash"
+
+# --- From delete.html ---
+msgid "Delete Post"
+msgstr "Maqolani oʻchirish"
+
+msgid ""
+"Are you sure you want to delete the post \"<strong>%(title)s</strong>\"? "
+"This action cannot be undone."
+msgstr ""
+"Siz haqiqatan ham \"<strong>%(title)s</strong>\" nomli maqolani "
+"oʻchirmoqchimisiz? Bu amalni ortga qaytarib boʻlmaydi."
+
+msgid "Yes, Delete"
+msgstr "Ha, oʻchirilsin"
+
+# --- From detail.html ---
+msgid "Published on %(date)s"
+msgstr "%(date)s sanasida chop etilgan"
+
+msgid "Tags:"
+msgstr "Teglar:"
+
+msgid "Edit"
+msgstr "Tahrirlash"
+
+msgid "Delete"
+msgstr "Oʻchirish"
+
+msgid "All posts"
+msgstr "Barcha maqolalar"
+
+msgid "Comments"
+msgstr "Izohlar"
+
+msgid "at %(time)s"
+msgstr "soat %(time)s da"
+
+msgid "Are you sure you want to delete this comment?"
+msgstr "Siz haqiqatan ham ushbu izohni oʻchirmoqchimisiz?"
+
+msgid "No comments yet. Be the first to comment!"
+msgstr "Hozircha izohlar yoʻq. Birinchi boʻlib izoh qoldiring!"
+
+msgid "Leave a comment"
+msgstr "Izoh qoldirish"
+
+msgid "Submit comment"
+msgstr "Izohni yuborish"
+
+msgid ""
+"Please <a href=\"%(login_url)s?next=%(path)s\">log in</a> to leave a "
+"comment."
+msgstr ""
+"Izoh qoldirish uchun iltimos <a href=\"%(login_url)s?next=%(path)s\">tizimga"
+" kiring</a>."
+
+# --- From list.html ---
+msgid "Search results for \"%(query)s\""
+msgstr "\"%(query)s\" uchun qidiruv natijalari"
+
+#, python-format
+msgid "Found %(counter)s article"
+msgid_plural "Found %(counter)s articles"
+msgstr[0] "%(counter)s ta maqola topildi"
+
+msgid "Read More"
+msgstr "Davomini o'qish"
+
+msgid "No articles yet"
+msgstr "Hozircha maqolalar yo'q"
+
+msgid "New interesting articles will be added soon!"
+msgstr "Tez orada yangi qiziqarli maqolalar qo'shiladi!"
+
+msgid "Write the first article"
+msgstr "Birinchi maqolani yozish"
+
+msgid "Page navigation"
+msgstr "Sahifa navigatsiyasi"
+
+msgid "Search"
+msgstr "Qidiruv"
+
+msgid "Type & Hit Enter..."
+msgstr "Yozing va Enter tugmasini bosing..."
+
+msgid "Categories"
+msgstr "Kategoriyalar"
+
+msgid "No categories available."
+msgstr "Kategoriyalar mavjud emas."
+
+msgid "Tags"
+msgstr "Teglar"
+
+msgid "No tags available."
+msgstr "Mavjud teglar yoʻq."
+
+msgid "Recent Articles"
+msgstr "Soʻnggi maqolalar"
+
+msgid "No recent articles."
+msgstr "Yangi maqolalar yoʻq."
+
+# --- From update.html ---
+msgid "Edit Post"
+msgstr "Maqolani tahrirlash"
+
+msgid "Last updated:"
+msgstr "Soʻnggi yangilanish:"
+
+msgid "Introduction"
+msgstr "Kirish"
+
+msgid ""
+"We value your privacy and are committed to protecting your personal data. "
+"This privacy policy explains how we collect, use, and safeguard your "
+"information when you visit our blog."
+msgstr ""
+"Biz sizning maxfiyligingizni qadrlaymiz va shaxsiy maʼlumotlaringizni himoya"
+" qilishga intilamiz. Ushbu maxfiylik siyosati bizning blogimizga tashrif "
+"buyurganingizda maʼlumotlaringizni qanday yigʻishimiz, ishlatishimiz va "
+"himoya qilishimizni tushuntiradi."
+
+msgid "Information We Collect"
+msgstr "Biz yigʻadigan maʼlumotlar"
+
+msgid ""
+"We may collect personal information that you voluntarily provide to us, such"
+" as your name, email address, and profile details when you register or leave"
+" comments."
+msgstr ""
+"Siz roʻyxatdan oʻtganingizda yoki izoh qoldirganingizda, ixtiyoriy ravishda "
+"taqdim etgan shaxsiy maʼlumotlaringizni (masalan, ismingiz, elektron pochta "
+"manzilingiz va profil maʼlumotlaringizni) yigʻishimiz mumkin."
+
+msgid "How We Use Your Information"
+msgstr "Maʼlumotlaringizdan qanday foydalanamiz"
+
+msgid ""
+"We use your information to operate and maintain our blog, personalize your "
+"experience, respond to your comments or inquiries, and send occasional "
+"updates if you subscribe."
+msgstr ""
+"Biz sizning maʼlumotlaringizdan blogimiz faoliyatini yuritish, uni qoʻllab-"
+"quvvatlash, foydalanish tajribangizni shaxsiylashtirish, izoh va "
+"soʻrovlaringizga javob berish hamda obuna boʻlgan boʻlsangiz, vaqti-vaqti "
+"bilan yangiliklarni yuborish uchun foydalanamiz."
+
+msgid "Cookies and Tracking"
+msgstr "Kukilar (Cookies) va kuzatuv"
+
+msgid ""
+"Our website uses cookies to enhance your browsing experience. You can choose"
+" to disable cookies through your individual browser settings if you prefer."
+msgstr ""
+"Veb-saytimiz sizga qulaylik yaratish maqsadida kuki (cookies) fayllaridan "
+"foydalanadi. Agar xohlasangiz, brauzeringiz sozlamalari orqali kuki "
+"fayllarini oʻchirib qoʻyishingiz mumkin."
+
+msgid "Changes to This Policy"
+msgstr "Siyosatdagi oʻzgarishlar"
+
+msgid ""
+"We reserve the right to update this privacy policy at any time. Any changes "
+"will be posted on this page with an updated revision date."
+msgstr ""
+"Biz ushbu maxfiylik siyosatini istalgan vaqtda yangilash huquqini saqlab "
+"qolamiz. Har qanday oʻzgarishlar ushbu sahifada yangilangan sana bilan eʼlon"
+" qilinadi."
+
+msgid "Back to Home"
+msgstr "Bosh sahifaga qaytish"
+
+msgid "Acceptance of Terms"
+msgstr "Shartlarni qabul qilish"
+
+msgid ""
+"By accessing or using our blog, you agree to be bound by these Terms of "
+"Service and all applicable laws and regulations. If you do not agree, please"
+" do not use this site."
+msgstr ""
+"Blogimizga kirish yoki undan foydalanish orqali siz ushbu Foydalanish "
+"shartlariga hamda barcha tegishli qonun va qoidalarga rioya qilishga rozilik"
+" bildirasiz. Agar rozi boʻlmasangiz, saytdan foydalanmasligingizni "
+"soʻraymiz."
+
+msgid "User Accounts & Conduct"
+msgstr "Foydalanuvchi hisoblari va xulq-atvori"
+
+msgid ""
+"When you create an account, you must provide accurate information. You are "
+"entirely responsible for maintaining the confidentiality of your account "
+"password and for all activities that occur under your account."
+msgstr ""
+"Hisob (akkaunt) yaratganingizda, toʻgʻri maʼlumotlarni taqdim etishingiz "
+"kerak. Hisobingiz paroli maxfiyligini saqlash va hisobingiz ostida amalga "
+"oshiriladigan barcha harakatlar uchun toʻliq javobgarsiz."
+
+msgid "Intellectual Property"
+msgstr "Intellektual mulk"
+
+msgid ""
+"All content published on this blog, including articles, images, and logos, "
+"is the property of the blog owners or content creators and is protected by "
+"copyright laws."
+msgstr ""
+"Ushbu blogda chop etilgan barcha kontent, jumladan maqolalar, rasmlar va "
+"logotiplar blog egalari yoki kontent mualliflarining mulki hisoblanadi va "
+"mualliflik huquqi qonunlari bilan himoyalangan."
+
+msgid "Limitation of Liability"
+msgstr "Javobgarlikni cheklash"
+
+msgid ""
+"This blog is provided on an \"as is\" basis. We make no warranties regarding"
+" the accuracy or reliability of the content and will not be liable for any "
+"damages arising from your use of this site."
+msgstr ""
+"Ushbu blog \"asl holatida\" taqdim etiladi. Biz kontentning toʻgʻriligi yoki"
+" ishonchliligi boʻyicha hech qanday kafolat bermaymiz va ushbu saytdan "
+"foydalanish natijasida kelib chiqadigan har qanday zararlar uchun javobgar "
+"boʻlmaymiz."
+
+msgid "Governing Law"
+msgstr "Amaldagi qonunchilik"
+
+msgid ""
+"These terms shall be governed by and construed in accordance with the local "
+"laws, without regard to its conflict of law provisions."
+msgstr ""
+"Ushbu shartlar mahalliy qonunchilikka muvofiq tartibga solinadi va talqin "
+"qilinadi, qonunlar toʻqnashuvi qoidalaridan qatʼi nazar."
+
+msgid "No biography available yet."
+msgstr "Biografiya hali mavjud emas."
+
+msgid "Articles by this author"
+msgstr "Ushbu muallifning maqolalari"
+
+msgid "This author hasn't published any articles yet."
+msgstr "Ushbu muallif hali biror maqola chop etmadi."
+
+msgid "Article navigation"
+msgstr "Maqola navigatsiyasi"
+
+# --- From base.html ---
+msgid "My Bootstrap Blog"
+msgstr "Mening Bootstrap Blogim"
+
+msgid "This is meta description"
+msgstr "Bu meta tavsif"
+
+msgid ""
+"Developed By <a href=\"https://t.me/Abdulloh_ID/\" "
+"target=\"_blank\">Abdulloh Abdusamadov</a>"
+msgstr ""
+"<a href=\"https://t.me/Abdulloh_ID/\" target=\"_blank\">Abdulloh "
+"Abdusamadov</a> tomonidan ishlab chiqildi"
+
+msgid "Home"
+msgstr "Bosh sahifa"
+
+msgid "Create Post"
+msgstr "Maqola yozish"
+
+msgid "Pages"
+msgstr "Sahifalar"
+
+msgid "Terms Conditions"
+msgstr "Foydalanish shartlari"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Logout"
+msgstr "Chiqish"
+
+msgid "Login"
+msgstr "Kirish"
+
+# Article create
+msgid "Title"
+msgstr "Sarlavha"
+
+msgid "Summary"
+msgstr "Qisqacha mazmuni"
+
+msgid "Body"
+msgstr "Maqola matni"
+
+msgid "Thumbnail"
+msgstr "Muqova rasmi"
+
+msgid "Category"
+msgstr "Kategoriya"
+
+msgid "Comma-separated."
+msgstr "Vergul bilan ajrating."
+
+msgid "tag1, tag2, tag3"
+msgstr "teg1, teg2, teg3"
+
+msgid "Comment"
+msgstr "Izoh"
+
+msgid "Name"
+msgstr "Ism"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Submit Comment"
+msgstr "Izoh qoldirish"
+
+msgid "All Posts"
+msgstr "Barcha postlar"
+
+msgid "Leave a Comment"
+msgstr "Izoh qoldirish"
+
+msgid "Submit"
+msgstr "Yuborish"
+
+#, python-format
+msgid "Search Results for \"%(query)s\""
+msgstr "\"%(query)s\" boʻyicha qidiruv natijalari"
+
+# Policy
+msgid ""
+"Name and email address when you leave a comment, and profile details if you "
+"choose to register an account"
+msgstr ""
+"Siz izoh qoldirganingizda ismingiz va elektron pochtangiz, shuningdek, agar "
+"siz akkaunt yaratishni tanlasangiz profil ma'lumotlaringiz"
+
+msgid ""
+"Send important updates if you create an account, or reply to your messages"
+msgstr ""
+"Agar siz akkaunt yaratsangiz muhim yangilanishlarni yuborish yoki "
+"xabarlaringizga javob berish"
+
+msgid "Access, update, or delete your account information (if you have one)"
+msgstr ""
+"Akkauntingiz ma'lumotlariga kirish, ularni yangilash yoki o'chirish (agar "
+"mavjud bo'lsa)"
+
+msgid "Table of contents"
+msgstr "Mundarija"
+
+msgid "Data We Collect"
+msgstr "Biz to'playdigan ma'lumotlar"
+
+msgid "How We Use Your Data"
+msgstr "Ma'lumotlaringizdan qanday foydalanamiz"
+
+msgid "Data Protection"
+msgstr "Ma'lumotlarni himoya qilish"
+
+msgid "Your Rights"
+msgstr "Sizning huquqlaringiz"
+
+msgid "Policy Updates"
+msgstr "Siyosat yangilanishlari"
+
+msgid ""
+"By using our site, you consent to the data practices described in this "
+"policy."
+msgstr ""
+"Saytimizdan foydalanish orqali siz ushbu siyosatda bayon etilgan ma'lumotlar"
+" amaliyotiga rozilik bildirasiz."
+
+msgid "We may collect the following types of information:"
+msgstr "Biz quyidagi turdagi ma'lumotlarni to'plashimiz mumkin:"
+
+msgid "Usage Data"
+msgstr "Foydalanish ma'lumotlari"
+
+msgid "Pages visited, time spent, referral sources, and device information"
+msgstr ""
+"Tashrif buyurilgan sahifalar, sarflangan vaqt, yo'naltiruvchi manbalar va "
+"qurilma ma'lumotlari"
+
+msgid "Cookies"
+msgstr "Kukilar (Cookies)"
+
+msgid "Small data files stored on your device to improve your experience"
+msgstr ""
+"Tajribangizni yaxshilash uchun qurilmangizda saqlanadigan kichik ma'lumotlar"
+" fayllari"
+
+msgid "Optional Information"
+msgstr "Ixtiyoriy ma'lumotlar"
+
+msgid "Profile photos, social links, or bio content you choose to share"
+msgstr ""
+"Profil rasmlari, ijtimoiy tarmoq havolalari yoki siz ulashishni tanlagan "
+"biografiya"
+
+msgid "Your data helps us provide better services. We use it to:"
+msgstr ""
+"Sizning ma'lumotlaringiz bizga yaxshiroq xizmat ko'rsatishga yordam beradi. "
+"Biz undan quyidagi maqsadlarda foydalanamiz:"
+
+msgid "Personalize your experience and show relevant content"
+msgstr "Tajribangizni shaxsiylashtirish va tegishli kontentni ko'rsatish"
+
+msgid "Respond to your comments, messages, and support requests"
+msgstr "Izohlaringiz, xabarlaringiz va yordam so'rovlaringizga javob berish"
+
+msgid "Analyze site usage to improve performance and content"
+msgstr ""
+"Ishlash va kontentni yaxshilash uchun saytdan foydalanishni tahlil qilish"
+
+msgid "Prevent fraud, spam, and unauthorized access"
+msgstr "Firibgarlik, spam va ruxsatsiz kirishning oldini olish"
+
+msgid ""
+"We never sell your personal data to third parties for marketing purposes."
+msgstr ""
+"Biz hech qachon shaxsiy ma'lumotlaringizni marketing maqsadida uchinchi "
+"shaxslarga sotmaymiz."
+
+msgid "Data Security & Protection"
+msgstr "Ma'lumotlar xavfsizligi va himoyasi"
+
+msgid ""
+"We implement industry-standard security measures to protect your "
+"information:"
+msgstr ""
+"Ma'lumotlaringizni himoya qilish uchun biz sanoat standartidagi xavfsizlik "
+"choralarini qo'llaymiz:"
+
+msgid "Encryption for data transmission (HTTPS/SSL)"
+msgstr "Ma'lumotlarni uzatish uchun shifrlash (HTTPS/SSL)"
+
+msgid "Secure servers with regular security audits"
+msgstr "Muntazam xavfsizlik tekshiruvlariga ega xavfsiz serverlar"
+
+msgid "Access controls limiting who can view your data"
+msgstr "Ma'lumotlaringizni kim ko'rishini cheklovchi kirish nazorati"
+
+msgid "Regular backups and disaster recovery procedures"
+msgstr "Muntazam zaxira nusxalari va falokatlarni tiklash jarayonlari"
+
+msgid "Your Rights & Choices"
+msgstr "Sizning huquq va tanlovlaringiz"
+
+msgid "You have control over your personal data. You can:"
+msgstr ""
+"Siz shaxsiy ma'lumotlaringiz ustidan nazoratga egasiz. Siz quyidagilarni "
+"amalga oshirishingiz mumkin:"
+
+msgid "Opt out of non-essential emails via unsubscribe links"
+msgstr ""
+"Obunani bekor qilish havolalari orqali muhim bo'lmagan elektron xatlardan "
+"voz kechish"
+
+msgid ""
+"Disable cookies in your browser settings (may affect site functionality)"
+msgstr ""
+"Brauzer sozlamalarida kukilarni o'chirib qo'yish (sayt ishlashiga ta'sir "
+"qilishi mumkin)"
+
+msgid "Request a copy of your data in a portable format"
+msgstr "Ma'lumotlaringiz nusxasini portativ formatda talab qilish"
+
+msgid "Withdraw consent for data processing where applicable"
+msgstr ""
+"Tegishli hollarda ma'lumotlarni qayta ishlashga berilgan rozilikni qaytarib "
+"olish"
+
+msgid "Third-Party Services"
+msgstr "Uchinchi tomon xizmatlari"
+
+msgid "Common third parties we use"
+msgstr "Biz foydalanadigan umumiy uchinchi tomon xizmatlari"
+
+msgid "Google Analytics (analytics), Social share buttons"
+msgstr "Google Analytics (tahlil), ijtimoiy tarmoq tugmalari"
+
+msgid "Privacy Policy Updates"
+msgstr "Maxfiylik siyosati yangilanishlari"
+
+msgid ""
+"We may update this policy to reflect changes in our services or legal "
+"requirements. When we do, we will:"
+msgstr ""
+"Xizmatlarimizdagi yoki qonuniy talablardagi o'zgarishlarni aks ettirish "
+"uchun ushbu siyosatni yangilashimiz mumkin. Shunday qilganimizda, biz:"
+
+msgid "Post the revised policy on this page with an updated \"Last updated\" date"
+msgstr ""
+"Qayta ko'rib chiqilgan siyosatni yangilangan \"So'nggi yangilanish\" sanasi "
+"bilan ushbu sahifada nashr etish"
+
+msgid "Notify registered users via email for significant changes"
+msgstr ""
+"Muhim o'zgarishlar haqida ro'yxatdan o'tgan foydalanuvchilarni elektron "
+"pochta orqali xabardor qilamiz"
+
+msgid "Provide a reasonable transition period before new terms take effect"
+msgstr ""
+"Yangi shartlar kuchga kirishidan oldin oqilona o'tish davrini taqdim etamiz"
+
+msgid ""
+"Your continued use of our services constitutes acceptance of the updated "
+"policy"
+msgstr ""
+"Xizmatlarimizdan foydalanishni davom ettirishingiz yangilangan siyosatni "
+"qabul qilganingizni anglatadi"
+
+msgid "Children's Privacy"
+msgstr "Bolalar maxfiyligi"
+
+msgid "We aim to respond to all privacy inquiries within 5 business days."
+msgstr ""
+"Biz barcha maxfiylik so'rovlariga 5 ish kuni ichida javob berishga harakat "
+"qilamiz."
+
+msgid ""
+"We respect your privacy and are committed to protecting your personal data. "
+"This privacy policy explains how we collect, use, and safeguard your "
+"information when you visit our blog or interact with our services."
+msgstr ""
+"Biz sizning maxfiyligingizni hurmat qilamiz va shaxsiy ma'lumotlaringizni "
+"himoya qilishga intilamiz. Ushbu maxfiylik siyosati blogimizga tashrif "
+"buyurganingizda yoki xizmatlarimiz bilan aloqa qilganingizda "
+"ma'lumotlaringizni qanday to'plashimiz, foydalanishimiz va himoya "
+"qilishimizni tushuntiradi."
+
+msgid ""
+"To exercise these rights, contact us at <a "
+"href=\"mailto:%(contact_email)s\">%(contact_email)s</a>. We respond to all "
+"legitimate requests within 30 days."
+msgstr ""
+"Ushbu huquqlardan foydalanish uchun biz bilan bog'laning: <a "
+"href=\"mailto:%(contact_email)s\">%(contact_email)s</a>. Biz barcha qonuniy "
+"so'rovlarga 30 kun ichida javob beramiz."
+
+msgid ""
+"Our site may include links to external services (e.g., social media, "
+"analytics, comment systems). These third parties have their own privacy "
+"policies. We are not responsible for their data practices. We recommend "
+"reviewing their policies before sharing information."
+msgstr ""
+"Bizning saytimiz tashqi xizmatlarga (masalan, ijtimoiy tarmoqlar, tahlillar,"
+" izoh tizimlari) havolalarni o'z ichiga olishi mumkin. Ushbu uchinchi "
+"tomonlar o'zlarining maxfiylik siyosatiga ega. Biz ularning ma'lumotlar "
+"bilan ishlash amaliyoti uchun javobgar emasmiz. Ma'lumot ulashishdan oldin "
+"ularning siyosatini ko'rib chiqishni tavsiya qilamiz."
+
+msgid ""
+"Our services are not intended for users under 16 years of age. We do not "
+"knowingly collect personal information from children. If you are a parent "
+"and believe your child has provided us with data, please contact us "
+"immediately so we can remove it."
+msgstr ""
+"Bizning xizmatlarimiz 16 yoshga to'lmagan foydalanuvchilar uchun "
+"mo'ljallanmagan. Biz bilgan holda bolalardan shaxsiy ma'lumotlarni "
+"to'plamaymiz. Agar siz ota-ona bo'lsangiz va farzandingiz bizga ma'lumot "
+"taqdim etgan deb hisoblasangiz, uni o'chirib tashlashimiz uchun darhol biz "
+"bilan bog'laning."
+
+msgid ""
+"Questions about this privacy policy? Contact our privacy team at <a "
+"href=\"mailto:%(email)s\">%(email)s</a>."
+msgstr ""
+"Ushbu maxfiylik siyosati bo'yicha savollaringiz bormi? Maxfiylik bo'yicha "
+"guruhimiz bilan bog'laning: <a href=\"mailto:%(email)s\">%(email)s</a>."
+
+msgid "Contact Us"
+msgstr "Biz bilan bogʻlanish"
+
+# About Page
+msgid "About Us"
+msgstr "Biz haqimizda"
+
+msgid "Edit Content"
+msgstr "Kontentni tahrirlash"
+
+msgid "Hi, I Am %(name)s"
+msgstr "Salom, Men %(name)s"
+
+msgid "Edit Page"
+msgstr "Sahifani tahrirlash"
+
+msgid "Edit About Page"
+msgstr "«Biz haqimizda» sahifasini tahrirlash"
+
+msgid "Profile Photo"
+msgstr "Profil rasmi"
+
+msgid "Current photo"
+msgstr "Joriy rasm"
+
+msgid "About Content"
+msgstr "Sahifa matni"
+
+# Crispy Forms File Widget
+msgid "Currently"
+msgstr "Hozirgi"
+
+msgid "Change"
+msgstr "O‘zgartirish"
+
+msgid "Clear"
+msgstr "Tozalash"
+
+msgid "Message sent successfully!"
+msgstr "Xabar muvaffaqiyatli yuborildi!"
+
+msgid "You don't have permission to edit this page."
+msgstr "Sizda bu sahifani tahrirlash huquqi yo'q."
+
+msgid "About page updated successfully."
+msgstr "\"Biz haqimizda\" sahifasi muvaffaqiyatli yangilandi."
+
+# Contact Page
+msgid "Talk To Me Anytime :)"
+msgstr "Men bilan istalgan vaqtda bog‘lanishingiz mumkin :)"
+
+msgid "Your Name"
+msgstr "Ismingiz"
+
+msgid "Enter your full name"
+msgstr "To‘liq ismingizni kiriting"
+
+msgid "Your Email"
+msgstr "Elektron pochtangiz"
+
+msgid "Enter your email address"
+msgstr "Elektron pochta manzilingizni kiriting"
+
+msgid "Your Message"
+msgstr "Xabaringiz"
+
+msgid "How can we help you?"
+msgstr "Sizga qanday yordam bera olaman?"
+
+msgid "Send Message"
+msgstr "Xabarni yuborish"
+
+msgid "Ask Us Anything"
+msgstr "Bizdan istalgan narsani so‘rang"
+
+msgid "Or just say hi"
+msgstr "Yoki shunchaki salom yo‘llang"
+
+msgid "Prefer Email? Write Us Directly"
+msgstr "Elektron pochtani afzal ko‘rasizmi? Bizga to‘g‘ridan-to‘g‘ri yozing"
+
+msgid "Terms and Conditions"
+msgstr "Foydalanish shartlari"
+
+#, python-format
+msgid "Last updated: %(date)s"
+msgstr "Soʻnggi yangilanish: %(date)s"
+
+msgid "Contributor Responsibility"
+msgstr "Mualliflar mas'uliyati"
+
+msgid "Policy Changes"
+msgstr "Siyosatdagi o'zgarishlar"
+
+msgid "Responsibility of Contributors"
+msgstr "Mualliflarning majburiyatlari"
+
+msgid ""
+"Contributors are responsible for ensuring that all content they submit is "
+"accurate, lawful, and does not infringe upon the rights of others. By "
+"posting content, you grant us a non-exclusive license to use, reproduce, and"
+" display such content on our platform."
+msgstr ""
+"Mualliflar o'zlari taqdim etgan barcha kontentning to'g'ri, qonuniy bo'lishi"
+" va boshqalarning huquqlarini buzmasligi uchun javobgardirlar. Kontentni "
+"joylashtirish orqali siz bizga ushbu kontentdan platformamizda foydalanish, "
+"uni ko'paytirish va namoyish etish uchun eksklyuziv bo'lmagan litsenziya "
+"berasiz."
+
+msgid ""
+"We reserve the right to remove any content that violates these terms, is "
+"offensive, or is deemed inappropriate at our sole discretion."
+msgstr ""
+"Biz ushbu shartlarni buzadigan, haqoratli yoki bizning fikrimizcha nomaqbul "
+"deb hisoblangan har qanday kontentni o'z xohishimizga ko'ra o'chirib "
+"tashlash huquqini saqlab qolamiz."
+
+msgid "Gathering of Personal Information"
+msgstr "Shaxsiy ma'lumotlarni yig'ish"
+
+msgid ""
+"When you register, comment, or interact with our services, we may collect "
+"personal information such as your name, email address, and usage data. This "
+"information is used solely to improve your experience, provide support, and "
+"communicate important updates."
+msgstr ""
+"Siz ro'yxatdan o'tganingizda, izoh qoldirganingizda yoki xizmatlarimizdan "
+"foydalanganingizda, biz ismingiz, elektron pochta manzilingiz va foydalanish"
+" ma'lumotlari kabi shaxsiy ma'lumotlarni yig'ishimiz mumkin. Ushbu "
+"ma'lumotlardan faqat foydalanish tajribangizni yaxshilash, qo'llab-"
+"quvvatlash va muhim yangilanishlarni yuborish uchun foydalaniladi."
+
+msgid ""
+"We do not sell, rent, or trade your personal information to third parties "
+"for marketing purposes."
+msgstr ""
+"Biz sizning shaxsiy ma'lumotlaringizni marketing maqsadlarida uchinchi "
+"shaxslarga sotmaymiz, ijaraga bermaymiz va ayriboshlamaymiz."
+
+msgid "Protection of Personal Information"
+msgstr "Shaxsiy ma'lumotlarni himoya qilish"
+
+msgid ""
+"We implement industry-standard security measures to protect your data from "
+"unauthorized access, alteration, or disclosure. This includes encryption, "
+"secure servers, and regular security audits."
+msgstr ""
+"Ma'lumotlaringizni ruxsatsiz kirish, o'zgartirish yoki oshkor qilishdan "
+"himoya qilish uchun biz sanoat standartidagi xavfsizlik choralarini "
+"qo'llaymiz. Bunga shifrlash, xavfsiz serverlar va muntazam xavfsizlik "
+"tekshiruvlari kiradi."
+
+msgid "Privacy Policy Changes"
+msgstr "Maxfiylik siyosatidagi o'zgarishlar"
+
+msgid ""
+"We may update these terms periodically to reflect changes in our services or"
+" legal requirements. When we do, we will:"
+msgstr ""
+"Xizmatlarimizdagi yoki qonuniy talablardagi o'zgarishlarni aks ettirish "
+"uchun ushbu shartlarni vaqti-vaqti bilan yangilab turishimiz mumkin. Shunday"
+" qilganimizda, biz:"
+
+msgid "Post the revised terms on this page with an updated \"Last updated\" date"
+msgstr ""
+"Qayta ko'rib chiqilgan shartlarni yangilangan \"So'nggi yangilanish\" sanasi"
+" bilan ushbu sahifada nashr etamiz"
+
+msgid ""
+"Your continued use of our services after changes constitutes acceptance of "
+"the updated terms"
+msgstr ""
+"O'zgarishlardan keyin xizmatlarimizdan foydalanishni davom ettirishingiz "
+"yangilangan shartlarni qabul qilganingizni anglatadi"
+
+#, python-format
+msgid ""
+"Questions about these terms? Contact us at <a "
+"href=\"mailto:%(email)s\">%(email)s</a>."
+msgstr ""
+"Ushbu shartlar bo'yicha savollaringiz bormi? Biz bilan bog'laning: <a "
+"href=\"mailto:%(email)s\">%(email)s</a>."
+
+msgid "Date:"
+msgstr "Sana:"
+
+msgid "Category:"
+msgstr "Kategoriya:"
+
+msgid "Slug missing"
+msgstr "Slug kiritilmagan"
+
+msgid "No tags available"
+msgstr "Teglar mavjud emas"
+
+msgid "Latest Articles"
+msgstr "So'nggi maqolalar"
+
+msgid "No articles available."
+msgstr "Maqolalar mavjud emas."
+
+# Sign up
+msgid "You must agree to the Terms of Service and Privacy Policy to continue."
+msgstr ""
+"Davom etish uchun Foydalanish shartlari va Maxfiylik siyosatiga rozilik "
+"bildirishingiz shart."
+
+msgid ""
+"Your password must contain at least 8 characters and cannot be entirely "
+"numeric, too similar to your personal info, or commonly used."
+msgstr ""
+"Parolingiz kamida 8 ta belgidan iborat bo'lishi va faqat raqamlardan, "
+"shaxsiy ma'lumotlaringizga o'xshash yoki keng tarqalgan parollardan iborat "
+"bo'lmasligi kerak."
+
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+"Majburiy. 150 ta belgidan oshmasligi kerak. Faqat harflar, raqamlar va "
+"@/./+/-/_ belgilari."
+
+msgid "This username is already taken. Please choose another."
+msgstr "Bu foydalanuvchi nomi band. Iltimos, boshqa nom tanlang."
+
+msgid "Your profile has been updated!"
+msgstr "Profilingiz yangilandi!"
+
+msgid "Your password was successfully updated!"
+msgstr "Parolingiz muvaffaqiyatli yangilandi!"
+
+msgid "Account created successfully!"
+msgstr "Hisob muvaffaqiyatli yaratildi!"

@@ -79,16 +79,12 @@ class CategoryArticleListView(SidebarContextMixin, ListView):
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Article.objects.filter(category=self.category).order_by('-date')
 
-    # In views.py -> CategoryArticleListView
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Match the Mixin's naming convention: 'article_count'
-        context['categories_with_count'] = Category.objects.annotate(
-            article_count=Count('articles') # Use 'articles' (related name) and 'article_count'
-        ).filter(article_count__gt=0)
-        
-        context['random_tags'] = Tag.objects.all()[:10]
+        # Simply pass down the active category highlights without rebuilding the whole list
+        context['current_category'] = self.category
         return context
+
 
 # View to list articles tagged with a specific tag.
 class TagArticleListView(SidebarContextMixin, ListView):
@@ -103,7 +99,7 @@ class TagArticleListView(SidebarContextMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_tag'] = self.tag  # Current tag for template.
+        context['current_tag'] = self.tag
         return context
 
 # View to search articles based on a query.

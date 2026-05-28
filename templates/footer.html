@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <footer class="section-sm pb-0 border-top border-default">
    <div class="container">
@@ -7,34 +7,34 @@
             <a class="mb-4 d-block" href="{% url 'home' %}">
                <img class="img-fluid" width="150px" src="{% static 'images/logo.png' %}" alt="LogBook">
             </a>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+            <p>{% trans "A personal blog template built with Django and Bootstrap. Share your stories, ideas, and expertise with the world." %}</p>
          </div>
          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <h6 class="mb-4">Quick Links</h6>
+            <h6 class="mb-4">{% trans "Quick Links" %}</h6>
             <ul class="list-unstyled footer-list">
-               <li><a href="{% url 'about' %}">About</a></li>
-               <li><a href="{% url 'contact' %}">Contact</a></li>
-               <li><a href="{% url 'privacy-policy' %}">Privacy Policy</a></li>
-               <li><a href="{% url 'terms-conditions' %}">Terms Conditions</a></li>
+               <li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+               <li><a href="{% url 'contact' %}">{% trans "Contact" %}</a></li>
+               <li><a href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
+               <li><a href="{% url 'terms-conditions' %}">{% trans "Terms & Conditions" %}</a></li>
             </ul>
          </div>
          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <h6 class="mb-4">Social Links</h6>
+            <h6 class="mb-4">{% trans "Follow Us" %}</h6>
             <ul class="list-unstyled footer-list">
                    {% if social_links.facebook %}
-                       <li><a href="{{ social_links.facebook }}" target="_blank">facebook</a></li>
+                       <li><a href="{{ social_links.facebook }}" target="_blank">{% trans "Facebook" %}</a></li>
                    {% endif %}
 
                    {% if social_links.linkedin %}
-                       <li><a href="{{ social_links.linkedin }}" target="_blank">linkedin</a></li>
+                       <li><a href="{{ social_links.linkedin }}" target="_blank">{% trans "LinkedIn" %}</a></li>
                    {% endif %}
 
                    {% if social_links.twitter %}
-                       <li><a href="{{ social_links.twitter }}" target="_blank">twitter</a></li>
+                       <li><a href="{{ social_links.twitter }}" target="_blank">{% trans "Twitter" %}</a></li>
                    {% endif %}
 
                    {% if social_links.instagram %}
-                       <li><a href="{{ social_links.instagram }}" target="_blank">instagram</a></li>
+                       <li><a href="{{ social_links.instagram }}" target="_blank">{% trans "Instagram" %}</a></li>
                    {% endif %}
             </ul>
          </div>
@@ -43,7 +43,7 @@
          <a href="javascript:void(0);" id="scrollTop"><i class="ti-angle-up"></i></a>
       </div>
       <div class="text-center">
-         <p class="content">&copy; {% now "Y" %} - Developed By <a href="https://t.me/Abdulloh_ID/" target="_blank">Abdulloh Abdusamadov</a></p>
+         <p class="content">&copy; {% now "Y" %} - {% blocktranslate %}Developed By <a href="https://t.me/Abdulloh_ID/" target="_blank">Abdulloh Abdusamadov</a>{% endblocktranslate %}</p>
       </div>
    </div>
 </footer>

@@ -1,79 +1,93 @@
 {% extends 'base.html' %}
+{% load i18n static %}
 
 {% block content %}
 <div class="container py-5">
     <div class="row">
-        <div class="col-md-4">
-            <!-- Current Avatar Preview -->
+        <!-- Left Column: Avatar & Quick Info -->
+        <div class="col-md-4 mb-4 mb-md-0">
             <div class="card shadow-sm">
                 <div class="card-body text-center">
-                    <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-                    <h5>{{ user.get_full_name }}</h5>
-                    <p class="text-muted">{{ user.email }}</p>
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" 
+                             class="img-fluid rounded-circle mb-3" 
+                             style="width: 150px; height: 150px; object-fit: cover;" 
+                             alt="{{ user.get_full_name }}">
+                    {% else %}
+                        <div class="rounded-circle bg-light text-primary d-flex align-items-center justify-content-center mx-auto mb-3" 
+                             style="width: 150px; height: 150px; font-size: 3rem;">
+                            <i class="ti-user"></i>
+                        </div>
+                    {% endif %}
+                    <h5 class="mb-1">{{ user.get_full_name|default:user.username }}</h5>
+                    <p class="text-muted mb-0">{{ user.email }}</p>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Right Column: Forms -->
         <div class="col-md-8">
             <!-- Personal Information Form -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
-                    <h5 class="text-primary text-capitalize">Shaxsiy ma'lumotlar</h5>
+                    <h5 class="text-primary mb-0">{% trans "Personal Information" %}</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <div class="form-group">
-                            <label for="first_name">Ism</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="first_name">{% trans "First Name" %}</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="last_name">{% trans "Last Name" %}</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Familiya</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+                            <label for="email">{% trans "Email Address" %}</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                            <label for="birthdate">{% trans "Date of Birth" %}</label>
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{ user.birthdate|date:'Y-m-d'|default:'' }}">
                         </div>
                         <div class="form-group">
-                            <label for="birthdate">Tug'ilgan sana</label>
-                            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{ user.birthdate|date:'Y-m-d' }}">
+                            <label for="avatar">{% trans "Profile Picture" %}</label>
+                            <input type="file" class="form-control-file" id="avatar" name="avatar" accept="image/*">
+                            <small class="form-text text-muted">{% trans "Recommended size: 300x300 pixels" %}</small>
                         </div>
-                        <div class="form-group">
-                            <label for="avatar">Avatar</label>
-                            <input type="file" class="form-control-file" id="avatar" name="avatar">
-                            <small class="form-text text-muted">Tavsiya qilingan o'lcham: 300x300 piksel</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary">O'zgarishlarni saqlash</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Save Changes" %}</button>
                     </form>
                 </div>
             </div>
-            
+
             <!-- Change Password Form -->
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h5 class="text-primary text-capitalize">Parolni o'zgartirish</h5>
+                    <h5 class="text-primary mb-0">{% trans "Change Password" %}</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{% url 'accounts:change_password' %}">
+                    <form method="post" action="{% url 'accounts:change_password' %}" novalidate>
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="current_password">Hozirgi parol</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password">
+                            <label for="current_password">{% trans "Current Password" %}</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password" autocomplete="current-password" required>
                         </div>
                         <div class="form-group">
-                            <label for="new_password1">Yangi parol</label>
-                            <input type="password" class="form-control" id="new_password1" name="new_password1">
+                            <label for="new_password1">{% trans "New Password" %}</label>
+                            <input type="password" class="form-control" id="new_password1" name="new_password1" autocomplete="new-password" required>
                         </div>
                         <div class="form-group">
-                            <label for="new_password2">Yangi parolni tasdiqlang</label>
-                            <input type="password" class="form-control" id="new_password2" name="new_password2">
+                            <label for="new_password2">{% trans "Confirm New Password" %}</label>
+                            <input type="password" class="form-control" id="new_password2" name="new_password2" autocomplete="new-password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Parolni o'zgartirish</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Change Password" %}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}

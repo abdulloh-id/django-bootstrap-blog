@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+from django.utils.translation import gettext_lazy as _
+from django.contrib.messages import constants as messages
+
 
 # 1. This finds the folder where manage.py lives
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,6 +60,9 @@ else:
     # Get ALLOWED_HOSTS from an environment variable as a comma-separated list
     ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
 
+# Project mode
+PERSONAL_BLOG_MODE = env.bool('PERSONAL_BLOG_MODE', default=False)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,9 +84,21 @@ INSTALLED_APPS = [
     'articles',
 ]
 
+# 2. Configure Languages
+USE_I18N = True
+
+LANGUAGE_CODE = 'uz'  # Default language
+
+LANGUAGES = [
+    ('uz', _('Uzbek')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -89,7 +107,20 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+# 4. Set where translation binaries live
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
 ROOT_URLCONF = 'config.urls'
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'secondary',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}
 
 SOCIAL_LINKS = {
     'facebook': env('SOCIAL_LINK_FACEBOOK', default=''), # Use default='' or raise error if missing
@@ -110,8 +141,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # Custom processor for your static pages/socials
                 'pages.context_processors.social_links',
+                'pages.context_processors.blog_mode',
             ],
         },
     },

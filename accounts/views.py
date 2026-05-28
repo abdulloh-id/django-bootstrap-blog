@@ -1,14 +1,14 @@
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
-from accounts.models import Profile
-
-from .forms import CustomUserChangeForm, EditProfileForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, EditProfileForm
 from .models import Profile
+from django.conf import settings
 
 
 @login_required
@@ -28,7 +28,7 @@ def edit_profile_view(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile has been updated!')
+            messages.success(request, _('Your profile has been updated!'))
             return redirect('accounts:edit_profile')
         else:
             # Display form errors
@@ -56,10 +56,31 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Keep the user logged in after password change.
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, _('Your password was successfully updated!'))
             return redirect('accounts:edit_profile') # Redirect after successful password change.
         else:
             # Display any errors from the password change form.
             for error in form.errors.values():
                 messages.error(request, error)
     return redirect('accounts:edit_profile') # Redirect to the edit profile page (GET request or form errors).
+
+def signup_view(request):
+    if settings.PERSONAL_BLOG_MODE:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        
+        if form.is_valid():
+            if not request.POST.get('terms_agreed'):
+                messages.error(request, _("You must agree to the Terms of Service and Privacy Policy to continue."))
+                return render(request, 'accounts/signup.html', {'form': form})
+            
+            user = form.save()
+            login(request, user)
+            messages.success(request, _("Account created successfully!"))
+            return redirect('home')
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, 'accounts/signup.html', {'form': form})

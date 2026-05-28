@@ -1,13 +1,13 @@
-def social_links(request):
-    """
-    Make social media links available to all templates.
-    """
-    from django.conf import settings
+from django.conf import settings
 
-    # Get social links from settings with empty defaults
-    # This ensures the template won't break if a link is missing
+
+def blog_mode(request):
+    return {
+        'PERSONAL_BLOG_MODE': settings.PERSONAL_BLOG_MODE
+    }
+
+def social_links(request):
     social_links = getattr(settings, 'SOCIAL_LINKS', {})
-    
     return {
         'social_links': social_links
     }

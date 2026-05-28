@@ -1,48 +1,127 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Terms and Conditions" %}{% endblock title %}
 
 {% block content %}
 <main class="section py-5">
    <div class="container">
       <div class="row">
          <div class="col-12">
-            <div class="title-bordered mb-5 d-flex align-items-center">
-               <h1 class="h4">Our Terms And Conditions</h1>
+            <!-- Page Header -->
+            <div class="title-bordered mb-5 d-flex align-items-center flex-wrap">
+               <h1 class="h4 mb-2 mb-sm-0">
+                  {% trans "Terms and Conditions" %}
+               </h1>
+               {% if last_updated %}
+               <small class="text-muted ml-auto">
+                  {% blocktranslate with date=last_updated|date:"DATE_FORMAT" trimmed %}
+                     Last updated: {{ date }}
+                  {% endblocktranslate %}
+               </small>
+               {% endif %}
             </div>
-            <div class="content">
-               <h4 id="responsibility-of-contributors">Responsibility of Contributors</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id
-                  feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti
-                  eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in
-                  tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus.
-                  Lorem quis viverra sed</p>
-               <p>pretium, aliquam sit. Praesent elementum magna amet, tincidunt eros, nibh in leo. Malesuada purus,
-                  lacus, at aliquam suspendisse tempus. Quis tempus amet, velit nascetur sollicitudin. At sollicitudin
-                  eget amet in. Eu velit nascetur sollicitudin erhdfvssfvrgss eget viverra nec elementum. Lacus,
-                  facilisis tristique lectus in.</p>
-               <h4 id="gathering-of-personal-information">Gathering of Personal Information</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id
-                  feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti
-                  eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in
-                  tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus.
-                  Lorem quis viverra sed</p>
-               <h4 id="protection-of--personal--information">Protection of Personal- Information</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id
-                  feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti
-                  eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in
-                  tortor cursus.</p>
-               <p>Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra
-                  sed
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id
-                  feugiat</p>
-               <h4 id="privacy-policy-changes">Privacy Policy Changes</h4>
-               <ol>
-                  <li>Sll the Themefisher items are designed to be with the latest , We check all</li>
-                  <li>comments that threaten or harm the reputation of any person or organization</li>
-                  <li>personal information including, but limited to, email addresses, telephone numbers</li>
-                  <li>Any Update come in The technology Customer will get automatic Notification.</li>
-               </ol>
 
+            <!-- Table of Contents -->
+            <nav class="d-none d-lg-block mb-4" aria-label="{% trans 'Table of contents' %}">
+               <ul class="list-inline small">
+                  <li class="list-inline-item mr-3">
+                     <a href="#responsibility" class="text-decoration-none text-muted hover-primary">
+                        {% trans "Contributor Responsibility" %}
+                     </a>
+                  </li>
+                  <li class="list-inline-item mr-3">
+                     <a href="#personal-info" class="text-decoration-none text-muted hover-primary">
+                        {% trans "Personal Information" %}
+                     </a>
+                  </li>
+                  <li class="list-inline-item mr-3">
+                     <a href="#protection" class="text-decoration-none text-muted hover-primary">
+                        {% trans "Data Protection" %}
+                     </a>
+                  </li>
+                  <li class="list-inline-item">
+                     <a href="#changes" class="text-decoration-none text-muted hover-primary">
+                        {% trans "Policy Changes" %}
+                     </a>
+                  </li>
+               </ul>
+               <hr>
+            </nav>
+
+            <!-- Legal Content -->
+            <article class="content">
+               <section class="mb-4" id="responsibility">
+                  <h2 class="h5 mb-3">
+                     <a href="#responsibility" class="text-decoration-none text-dark">
+                        {% trans "Responsibility of Contributors" %}
+                     </a>
+                  </h2>
+                  <p>
+                     {% trans "Contributors are responsible for ensuring that all content they submit is accurate, lawful, and does not infringe upon the rights of others. By posting content, you grant us a non-exclusive license to use, reproduce, and display such content on our platform." %}
+                  </p>
+                  <p>
+                     {% trans "We reserve the right to remove any content that violates these terms, is offensive, or is deemed inappropriate at our sole discretion." %}
+                  </p>
+               </section>
+
+               <section class="mb-4" id="personal-info">
+                  <h2 class="h5 mb-3">
+                     <a href="#personal-info" class="text-decoration-none text-dark">
+                        {% trans "Gathering of Personal Information" %}
+                     </a>
+                  </h2>
+                  <p>
+                     {% trans "When you register, comment, or interact with our services, we may collect personal information such as your name, email address, and usage data. This information is used solely to improve your experience, provide support, and communicate important updates." %}
+                  </p>
+                  <p>
+                     {% trans "We do not sell, rent, or trade your personal information to third parties for marketing purposes." %}
+                  </p>
+               </section>
+
+               <section class="mb-4" id="protection">
+                  <h2 class="h5 mb-3">
+                     <a href="#protection" class="text-decoration-none text-dark">
+                        {% trans "Protection of Personal Information" %}
+                     </a>
+                  </h2>
+                  <p>
+                     {% trans "We implement industry-standard security measures to protect your data from unauthorized access, alteration, or disclosure. This includes encryption, secure servers, and regular security audits." %}
+                  </p>
+               </section>
+
+               <section class="mb-4" id="changes">
+                  <h2 class="h5 mb-3">
+                     <a href="#changes" class="text-decoration-none text-dark">
+                        {% trans "Privacy Policy Changes" %}
+                     </a>
+                  </h2>
+                  <p>{% trans "We may update these terms periodically to reflect changes in our services or legal requirements. When we do, we will:" %}</p>
+                  <ol class="pl-3">
+                     <li class="mb-2">{% trans "Post the revised terms on this page with an updated \"Last updated\" date" %}</li>
+                     <li class="mb-2">{% trans "Notify registered users via email for significant changes" %}</li>
+                     <li class="mb-2">{% trans "Provide a reasonable transition period before new terms take effect" %}</li>
+                     <li>{% trans "Your continued use of our services after changes constitutes acceptance of the updated terms" %}</li>
+                  </ol>
+               </section>
+
+               <!-- Contact Footer Component -->
+               <div class="mt-5 pt-4 border-top">
+                  <p class="text-muted mb-0">
+                     {% blocktranslate with email=contact_email|default:'legal@example.com' trimmed %}
+                        Questions about these terms? Contact us at <a href="mailto:{{ email }}">{{ email }}</a>.
+                     {% endblocktranslate %}
+                  </p>
+               </div>
+            </article>
+
+            <!-- Back to Top Link -->
+            <div class="text-right mt-4">
+               <a href="#" class="text-muted small" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                  <i class="ti-arrow-up mr-1"></i> {% trans "Back to top" %}
+               </a>
             </div>
+
          </div>
       </div>
    </div>

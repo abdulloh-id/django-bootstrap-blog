@@ -1,138 +1,178 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags static %}
+{% load crispy_forms_tags static i18n %}
 
 {% block content %}
 <main class="section py-5">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 mx-auto">
-				<div class="title-bordered mb-5 d-flex align-items-center">
-					<h1 class="h4">Hi, I Am John Doe</h1>
-					<ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block">
-					    {% if social_links.facebook %}
-					        <li class="list-inline-item"><a href="{{ social_links.facebook }}" target="_blank"><i class="ti-facebook"></i></a></li>
-					    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Header: Name + Social Links -->
+                <div class="title-bordered mb-5 d-flex align-items-center flex-wrap">
+                    <h1 class="h4 mb-2 mb-sm-0">
+                        {% blocktranslate trimmed with name=blog_owner.get_full_name|default:blog_owner.username %}
+                            Hi, I Am {{ name }}
+                        {% endblocktranslate %}
+                    </h1>
+                    <ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block mb-0">
+                        {% if social_links.facebook %}
+                            <li class="list-inline-item">
+                                <a href="{{ social_links.facebook }}" target="_blank" 
+                                   title="{% trans 'Facebook' %}" aria-label="{% trans 'Facebook' %}">
+                                    <i class="ti-facebook"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if social_links.linkedin %}
+                            <li class="list-inline-item">
+                                <a href="{{ social_links.linkedin }}" target="_blank" 
+                                   title="{% trans 'LinkedIn' %}" aria-label="{% trans 'LinkedIn' %}">
+                                    <i class="ti-linkedin"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if social_links.twitter %}
+                            <li class="list-inline-item">
+                                <a href="{{ social_links.twitter }}" target="_blank" 
+                                   title="{% trans 'Twitter' %}" aria-label="{% trans 'Twitter' %}">
+                                    <i class="ti-twitter"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if social_links.instagram %}
+                            <li class="list-inline-item">
+                                <a href="{{ social_links.instagram }}" target="_blank" 
+                                   title="{% trans 'Instagram' %}" aria-label="{% trans 'Instagram' %}">
+                                    <i class="ti-instagram"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
 
-					    {% if social_links.linkedin %}
-					        <li class="list-inline-item"><a href="{{ social_links.linkedin }}" target="_blank"><i class="ti-linkedin"></i></a></li>
-					    {% endif %}
+                <!-- View Mode -->
+                <div id="view-mode">
+                    {% if about.photo %}
+                        <img src="{{ about.photo.url }}" 
+                             class="img-fluid w-100 mb-4 rounded" 
+                             alt="{% trans 'Author photo' %}">
+                    {% else %}
+                        <img src="{% static 'images/author-full.jpg' %}" 
+                             class="img-fluid w-100 mb-4 rounded" 
+                             alt="{% trans 'Author photo' %}">
+                    {% endif %}
+                    
+                    <div class="content">
+                        {{ about.body|safe }}
+                    </div>
+                    
+                    {% if user.is_staff or user.is_superuser %}
+                    <div class="mt-4">
+                        <button id="edit-toggle" class="btn btn-outline-primary">
+                            <i class="ti-pencil mr-1"></i>
+                            {% blocktranslate trimmed %}
+                                Edit Page
+                            {% endblocktranslate %}
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
 
-					    {% if social_links.twitter %}
-					        <li class="list-inline-item"><a href="{{ social_links.twitter }}" target="_blank"><i class="ti-twitter"></i></a></li>
-					    {% endif %}
-
-					    {% if social_links.instagram %}
-					        <li class="list-inline-item"><a href="{{ social_links.instagram }}" target="_blank"><i class="ti-instagram"></i></a></li>
-					    {% endif %}
-					</ul>
-				</div>
-
-				<!-- View Mode -->
-				<div id="view-mode">
-					{% if about.photo %}
-						<img src="{{ about.photo.url }}" class="img-fluid w-100 mb-4 rounded-lg" alt="author">
-					{% else %}
-						<img src="{% static 'images/author-full.jpg' %}" class="img-fluid w-100 mb-4 rounded-lg" alt="author">
-					{% endif %}
-					
-					<div class="content">
-						{{ about.body|safe }}
-					</div>
-					{% if user.is_staff or user.is_superuser %}
-					<div>
-						<button id="edit-toggle" class="btn btn-outline-primary">
-							<i class="ti-pencil me-1"></i> Sahifani tahrirlash
-						</button>
-					</div>
-					{% endif %}
-				</div>
-
-				<!-- Edit Mode -->
-				{% if user.is_staff or user.is_superuser %}
-				<div id="edit-mode" style="display: none;">
-					<div class="card shadow-sm">
-						<div class="card-header bg-light">
-							<h3 class="card-title mb-0 text-primary text-center">Sahifa ma'lumotlarini tahrirlash</h3>
-						</div>
-						<div class="card-body p-4">
-							<form method="post" enctype="multipart/form-data" id="about-form">
-								{% csrf_token %}
-								{{ form.media }}
-								
-								{% if form.errors %}
-								<div class="alert alert-danger">
-									<strong>Please correct the following errors:</strong>
-									{{ form.errors }}
-								</div>
-								{% endif %}
-								
-								<div class="mb-3">
-									<label for="{{ form.photo.id_for_label }}">Profile Photo</label>
-									<div class="mb-2">
-										{% if about.photo %}
-											<img src="{{ about.photo.url }}" class="img-fluid" style="max-height: 200px;" alt="Current photo">
-											<p class="small text-muted">Current photo</p>
-										{% endif %}
-									</div>
-									{{ form.photo|as_crispy_field }}
-								</div>
-								
-								<div class="mb-3">
-									<label for="{{ form.body.id_for_label }}">About Content</label>
-									{{ form.body|as_crispy_field }}
-								</div>
-								
-								<div class="mt-4 text-end">
-									<button class="btn btn-light me-2" type="button" id="cancel-edit">Bekor qilish</button>
-									<button class="btn btn-primary" type="submit">
-										<i class="ti-save me-1"></i> Saqlash
-									</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				{% endif %}
-			</div>
-		</div>
-	</div>
+                <!-- Edit Mode (Staff Only) -->
+                {% if user.is_staff or user.is_superuser %}
+                <div id="edit-mode" style="display: none;">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title mb-0 text-primary text-center">
+                                {% trans "Edit About Page" %}
+                            </h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <form method="post" enctype="multipart/form-data" id="about-form" novalidate>
+                                {% csrf_token %}
+                                {{ form.media }}
+                                
+                                {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{% trans "Please fix the following errors:" %}</strong>
+                                    <ul class="mb-0 mt-2">
+                                        {% for error in form.non_field_errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="mb-3">
+                                    {% if about.photo %}
+                                        <div class="mb-2">
+                                            <img src="{{ about.photo.url }}" 
+                                                class="img-fluid rounded" 
+                                                style="max-height: 200px;" 
+                                                alt="{% trans 'Current photo' %}">
+                                        </div>
+                                        <p class="small text-muted">{% trans "Current photo" %}</p>
+                                    {% endif %}
+                                    
+                                    {# Рендерим поле фото через Crispy #}
+                                    {{ form.photo|as_crispy_field }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {# Рендерим текстовое поле через Crispy #}
+                                    {{ form.body|as_crispy_field }}
+                                </div>
+                                
+                                <div class="mt-4 text-right">
+                                    <button class="btn btn-outline-secondary mr-2" type="button" id="cancel-edit">
+                                        {% trans "Cancel" %}
+                                    </button>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="ti-save mr-1"></i> {% trans "Save Changes" %}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </main>
 
 {% if user.is_staff or user.is_superuser %}
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const editToggle = document.getElementById('edit-toggle');
-		const viewMode = document.getElementById('view-mode');
-		const editMode = document.getElementById('edit-mode');
-		const cancelEdit = document.getElementById('cancel-edit');
-		
-		editToggle.addEventListener('click', function() {
-			// Hide view mode and show edit mode
-			viewMode.style.display = 'none';
-			editMode.style.display = 'block';
-			editToggle.style.display = 'none';
-			
-			// Scroll to the top of the page
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
-		
-		cancelEdit.addEventListener('click', function() {
-			// Show view mode and hide edit mode
-			viewMode.style.display = 'block';
-			editMode.style.display = 'none';
-			editToggle.style.display = 'inline-block';
-			
-			// Optional: scroll back to where the edit button is
-			const editTogglePosition = editToggle.getBoundingClientRect().top + window.pageYOffset;
-			window.scrollTo({
-				top: editTogglePosition - 100, // Offset to make it more visible
-				behavior: 'smooth'
-			});
-		});
-	});
+    document.addEventListener('DOMContentLoaded', function() {
+        const editToggle = document.getElementById('edit-toggle');
+        const viewMode = document.getElementById('view-mode');
+        const editMode = document.getElementById('edit-mode');
+        const cancelEdit = document.getElementById('cancel-edit');
+        
+        if (editToggle) {
+            editToggle.addEventListener('click', function() {
+                viewMode.style.display = 'none';
+                editMode.style.display = 'block';
+                editToggle.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+        
+        if (cancelEdit) {
+            cancelEdit.addEventListener('click', function() {
+                viewMode.style.display = 'block';
+                editMode.style.display = 'none';
+                if (editToggle) editToggle.style.display = 'inline-block';
+                // Optional: scroll back to button position
+                const btnRect = editToggle && editToggle.getBoundingClientRect();
+                if (btnRect) {
+                    window.scrollTo({
+                        top: window.pageYOffset + btnRect.top - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+    });
 </script>
 {% endif %}
 {% endblock content %}
