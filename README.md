@@ -141,9 +141,25 @@ To add or update translated strings:
 python manage.py makemessages -l uz -l ru
 
 # Edit locale/uz/LC_MESSAGES/django.po and locale/ru/LC_MESSAGES/django.po
+```
 
-# Compile
+Then compile using one of two options:
+
+**Option A — Standard Django:**
+```bash
 python manage.py compilemessages
+```
+Requires GNU gettext binaries installed on your system. Works out of the box on Linux/macOS. On Windows, you may need to install gettext manually.
+
+**Option B — Custom script (recommended for Windows):**
+```bash
+python scripts/compile_po.py
+```
+A pure Python alternative using `polib` — no external binaries needed. Also automatically removes duplicate translation entries before compiling, which prevents gettext crashes from messy `.po` files.
+
+Install the dependency if you haven't already:
+```bash
+pip install polib
 ```
 
 ---
